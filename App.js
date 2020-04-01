@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList, ScrollView, style, Animated, PanResponder} from 'react-native';
+import SortableGrid from 'react-native-sortable-grid';
+import { StyleSheet, Text, View, Button, useState, TouchableOpacity, ScrollView, style, Animated, PanResponder} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -21,21 +22,46 @@ function HomeScreen({navigation}) {
   );
 }
 
-
-
 function Story_Creation() {
-  return (
-    <View style={styles.bottomView}>
-      <ScrollView style={styles.scrollViewStyle} horizontal={true}>
-      <Image source={require('./assets/Images/School/backpack.png')} style={styles.imageStyle}  />
-      <Image source={require('./assets/Images/School/basketball.png')} style={styles.imageStyle}  />
-      <Image source={require('./assets/Images/School/book.png')} style={styles.imageStyle}  />
-      <Image source={require('./assets/Images/School/bookshelf.png')} style={styles.imageStyle}  />
-      <Image source={require('./assets/Images/School/desktop.png')} style={styles.imageStyle}  />          
-      </ScrollView>
-    </View>   
 
+  const addImage = {key: "blank"}
+  
+  return (
+    
+    <View style={{ flex: 1, margin: (10,10,10,10)}}> 
+        <SortableGrid 
+        style={ flex = 6}
+        blockTransitionDuration = { 400 }
+        activeBlockCenteringDuration = { 200 }
+        itemsPerRow = { 5 }
+        >
+          {
+            [addImage.key, basketball, book, bookshelf, desktop, 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank'].map( (picture_name, index) =>
+
+              <View key={index} onTap={() => console.log("Story grid:", index, "was touched.", "Picture name:", picture_name) }>
+                
+                  <Image source={picture_name} style={{width: 150, height: 150}}/>
+              </View>
+              )
+          }
+        </SortableGrid>
+      <View style={styles.bottomView}>
+        <ScrollView style={styles.scrollViewStyle} horizontal={true}>
+        <TouchableOpacity onPress={() => addImage.key = "backpack"} >
+        <Image source={backpack} style={styles.imageStyle}  />
+          
+        </TouchableOpacity>
+          <Image source={basketball} style={styles.imageStyle}  />
+          <Image source={book} style={styles.imageStyle}  />
+          <Image source={bookshelf} style={styles.imageStyle}  />
+          <Image source={desktop} style={styles.imageStyle}  />          
+        </ScrollView>
+        
+      </View>   
+    </View>
+    
   );
+  
 } 
 
 const Stack = createStackNavigator();
@@ -56,24 +82,31 @@ function New_Story_Details({navigation}) {
   );
 }
 
-const Story_Stack = createStackNavigator();
-
-
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" 
-        component={HomeScreen} 
-        options={{ title: 'Main Menu'}}/>
-        <Stack.Screen name="Details" component={New_Story_Details} />
-        <Stack.Screen name="Story Creation" 
-          component={Story_Creation} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-  
+export default class Social_Stories extends React.Component{
+  render(){
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" 
+          component={HomeScreen} 
+          options={{ title: 'Main Menu'}}/>
+          <Stack.Screen name="Details" component={New_Story_Details} />
+          <Stack.Screen name="Story Creation" 
+            component={Story_Creation} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
+
+
+
+const backpack = require("./assets/Images/School/backpack.png");
+const basketball = require('./assets/Images/School/basketball.png');
+const book = require('./assets/Images/School/book.png');
+const bookshelf =  require('./assets/Images/School/bookshelf.png');
+const desktop =  require('./assets/Images/School/desktop.png');
+
 const styles = StyleSheet.create(
   {
       MainContainer:
@@ -104,6 +137,7 @@ const styles = StyleSheet.create(
       },
 
       scrollViewStyle:{
+        flex: 1,
         marginHorizontal: 20,
         marginVertical: 20
         
@@ -117,5 +151,5 @@ const styles = StyleSheet.create(
 
   });
 
-export default App;
+//export default App;
  
