@@ -1,6 +1,6 @@
 import React from 'react';
 import SortableGrid from 'react-native-sortable-grid';
-import { StyleSheet, Text, View, Button, useState, TouchableOpacity, ScrollView, style, Animated, PanResponder} from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -18,13 +18,25 @@ function HomeScreen({navigation}) {
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
+      <Button
+        title="Go to Archive"
+        onPress={() => navigation.navigate('Archive')}
+      />
+      <Button
+        title="Tutorial"
+        onPress={() => navigation.navigate('Tutorial')}
+      />
+      <Button
+        title="What are Social Stories?"
+        onPress={() => navigation.navigate('How To Story')}
+      />
     </View>
   );
 }
 
 function Story_Creation() {
 
-  const addImage = {key: "blank"}
+let newImage;
   
   return (
     
@@ -36,9 +48,9 @@ function Story_Creation() {
         itemsPerRow = { 5 }
         >
           {
-            [addImage.key, basketball, book, bookshelf, desktop, 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank'].map( (picture_name, index) =>
+            [newImage, basketball, book, bookshelf, desktop, 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank'].map( (picture_name, index) =>
 
-              <View key={index} onTap={() => console.log("Story grid:", index, "was touched.", "Picture name:", picture_name) }>
+              <View key={index} onTap={() => console.log("Story grid:", index, "was touched.", "Picture name:", picture_name) }> 
                 
                   <Image source={picture_name} style={{width: 150, height: 150}}/>
               </View>
@@ -47,7 +59,7 @@ function Story_Creation() {
         </SortableGrid>
       <View style={styles.bottomView}>
         <ScrollView style={styles.scrollViewStyle} horizontal={true}>
-        <TouchableOpacity onPress={() => addImage.key = "backpack"} >
+        <TouchableOpacity onPress={ ()=> newImage = backpack} >
         <Image source={backpack} style={styles.imageStyle}  />
           
         </TouchableOpacity>
@@ -82,23 +94,60 @@ function New_Story_Details({navigation}) {
   );
 }
 
+function Tutorial(){
+  return(
+  <View>
+    <Text>
+      tutorial test text
+    </Text>
+  </View>
+  );
+}
+
+function How_To_Story(){
+  return(
+  <View>
+    <Text>
+      What is a social story, and how the heck do you make one?? 
+    </Text>
+  </View>
+  );
+}
+
+function Archive(){
+  return(
+    <View>
+      <Text>
+        Placeholder for the archive
+      </Text>
+    </View>
+    );
+
+}
+
+
 export default class Social_Stories extends React.Component{
+  constructor(){
+    super()
+
+  }
+
+
   render(){
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" 
-          component={HomeScreen} 
-          options={{ title: 'Main Menu'}}/>
+          <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Main Menu'}}/>
           <Stack.Screen name="Details" component={New_Story_Details} />
-          <Stack.Screen name="Story Creation" 
-            component={Story_Creation} />
+          <Stack.Screen name="Story Creation" component={Story_Creation} />
+          <Stack.Screen name="Tutorial" component={Tutorial} />
+          <Stack.Screen name="How To Story" component={How_To_Story} />
+          <Stack.Screen name="Archive" component={Archive} />
         </Stack.Navigator>
       </NavigationContainer>
     );
-  }
+    }
 }
-
 
 
 const backpack = require("./assets/Images/School/backpack.png");
@@ -151,5 +200,5 @@ const styles = StyleSheet.create(
 
   });
 
-//export default App;
+//export default Social_Stories;
  
