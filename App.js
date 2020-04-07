@@ -1,12 +1,11 @@
-import React from 'react';
-import SortableGrid from 'react-native-sortable-grid';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+//import SortableGrid from 'react-native-sortable-grid';
+import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, PanResponder, Animated} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {Image} from 'react-native' ;
 import { render } from 'react-dom';
-
+import Carousel from 'react-native-snap-carousel';
 
 
 
@@ -34,43 +33,231 @@ function HomeScreen({navigation}) {
   );
 }
 
-function Story_Creation() {
+const schoolImages = [
+  require('./assets/Images/School/backpack.png'),
+  require('./assets/Images/School/basketball.png'),
+  require('./assets/Images/School/book.png'),
+  require('./assets/Images/School/bookshelf.png'),
+  require('./assets/Images/School/desktop.png'),
+  require('./assets/Images/School/diploma.png'),
+  require('./assets/Images/School/ebook_1.png'),
+  require('./assets/Images/School/ebook.png'),
+  require('./assets/Images/School/flask.png'),
+  require('./assets/Images/School/idea.png'),
+  require('./assets/Images/School/mortarboard.png'),
+  require('./assets/Images/School/open_book.png'),
+  require('./assets/Images/School/school_bus.png'),
+  require('./assets/Images/School/school_material_1.png'),
+  require('./assets/Images/School/school_material.png'),
+  require('./assets/Images/School/school.png'),
+  require('./assets/Images/School/student.png'),
+  require('./assets/Images/School/teacher.png'),
+  require('./assets/Images/School/trumpet.png'),
+  require('./assets/Images/School/uniform.png'),
+]
 
-let newImage;
+//KEEP MINAMISED - will refactor later if time, dont judge my hard coded rubbish
+const initialGrid = [
+  {
+    id: '0',
+    title: 'Grid 0',
+    imageSource: '',
+  },
+  {
+    id: '1',
+    title: 'Grid 1',
+    imageSource: '',
+  },
+  {
+    id: '2',
+    title: 'test3',
+    imageSource: '',
+  },
+  {
+    id: '3',
+    title: 'test4',
+    imageSource: '',
+  },
+  {
+    id: '4',
+    title: 'test5',
+    imageSource: '',
+  },
+  {
+    id: '5',
+    title: 'test6',
+    imageSource: '',
+  },
+  {
+    id: '6',
+    title: 'test7',
+    imageSource: '',
+  },
+  {
+    id: '7',
+    title: 'test8',
+    imageSource: '',
+  },
+  {
+    id: '8',
+    title: 'test9',
+    imageSource: '',
+  },
+  {
+    id: '9',
+    title: 'test10',
+    imageSource: '',
+  },
+  {
+    id: '10',
+    title: 'Grid 0',
+    imageSource: '',
+  },
+  {
+    id: '11',
+    title: 'Grid 1',
+    imageSource: '',
+  },
+  {
+    id: '12',
+    title: 'test3',
+    imageSource: '',
+  },
+  {
+    id: '13',
+    title: 'test4',
+    imageSource: '',
+  },
+  {
+    id: '14',
+    title: 'test5',
+    imageSource: '',
+  },
+  {
+    id: '15',
+    title: 'test6',
+    imageSource: '',
+  },
+  {
+    id: '16',
+    title: 'test7',
+    imageSource: '',
+  },
+  {
+    id: '17',
+    title: 'test8',
+    imageSource: '',
+  },
+  {
+    id: '18',
+    title: 'test9',
+    imageSource: '',
+  },
+  {
+    id: '19',
+    title: 'test10',
+    imageSource: '',
+  },
+  {
+    id: '20',
+    title: 'Grid 0',
+    imageSource: '',
+  },
+  {
+    id: '21',
+    title: 'Grid 1',
+    imageSource: '',
+  },
+  {
+    id: '22',
+    title: 'test3',
+    imageSource: '',
+  },
+  {
+    id: '23',
+    title: 'test4',
+    imageSource: '',
+  },
+  {
+    id: '24',
+    title: 'test5',
+    imageSource: '',
+  },
+  {
+    id: '25',
+    title: 'test6',
+    imageSource: '',
+  },
+  {
+    id: '26',
+    title: 'test7',
+    imageSource: '',
+  },
+  {
+    id: '27',
+    title: 'test8',
+    imageSource: '',
+  },
+  {
+    id: '28',
+    title: 'test9',
+    imageSource: '',
+  },
+  {
+    id: '29',
+    title: 'test10',
+    imageSource: '',
+  },
+];
+
+function Item({ imageSource }) {
+  return(
+    <View style={styles.row}>
+      <Image source={imageSource} style={styles.imageStyle}  />
+    </View>
+  );
+
+}
+
+function addImage(){
   
+}
+
+function Story_Creation() {
+  const [currentImage, setImage] = useState(0);
+  //let newImage;
+  //var imageArray = [newImage, basketball, book, bookshelf, desktop, 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank'];
+
   return (
     
-    <View style={{ flex: 1, margin: (10,10,10,10)}}> 
-        <SortableGrid 
-        style={ flex = 6}
-        blockTransitionDuration = { 400 }
-        activeBlockCenteringDuration = { 200 }
-        itemsPerRow = { 5 }
-        >
-          {
-            [newImage, basketball, book, bookshelf, desktop, 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank'].map( (picture_name, index) =>
+    <SafeAreaView style={{ flex: 1, margin: (10,10,10,10)}}> 
+      <FlatList
+      data={initialGrid}
+      //extraData={}
+      renderItem={({ item }) => <Item imageSource={item.imageSource}/>}
+      keyExtractor={item => item.id}
+      numColumns={5}
+      columnWrapperStyle={styles.row}
+      />
 
-              <View key={index} onTap={() => console.log("Story grid:", index, "was touched.", "Picture name:", picture_name) }> 
-                
-                  <Image source={picture_name} style={{width: 150, height: 150}}/>
+      <View style={styles.bottomView}>
+        <ScrollView style={styles.scrollViewStyle} horizontal={true}> 
+      
+        {
+          //prints out the schoolImage array, may chnage to drag and drop system
+            schoolImages.map( (src, index) =>
+
+              <View key={index}> 
+                <TouchableOpacity onPress={()=> addImage } style={styles.imageStyle}>
+                  <Image source={src} style={styles.imageStyle}/>
+                </TouchableOpacity>
               </View>
               )
-          }
-        </SortableGrid>
-      <View style={styles.bottomView}>
-        <ScrollView style={styles.scrollViewStyle} horizontal={true}>
-        <TouchableOpacity onPress={ ()=> newImage = backpack} >
-        <Image source={backpack} style={styles.imageStyle}  />
-          
-        </TouchableOpacity>
-          <Image source={basketball} style={styles.imageStyle}  />
-          <Image source={book} style={styles.imageStyle}  />
-          <Image source={bookshelf} style={styles.imageStyle}  />
-          <Image source={desktop} style={styles.imageStyle}  />          
+          }          
         </ScrollView>
         
       </View>   
-    </View>
+    </SafeAreaView>
     
   );
   
@@ -127,11 +314,13 @@ function Archive(){
 
 
 export default class Social_Stories extends React.Component{
-  constructor(){
-    super()
-
-  }
-
+  constructor(props){
+    super(props);
+    //panResponder - will do tuesday
+    //this.state = {
+    //  pan: new Animated.ValueXY()
+    //};
+}
 
   render(){
     return (
@@ -147,10 +336,12 @@ export default class Social_Stories extends React.Component{
       </NavigationContainer>
     );
     }
+    
 }
 
 
-const backpack = require("./assets/Images/School/backpack.png");
+//considered good practice to source images before use, not during
+const backpack = require('./assets/Images/School/backpack.png');
 const basketball = require('./assets/Images/School/basketball.png');
 const book = require('./assets/Images/School/book.png');
 const bookshelf =  require('./assets/Images/School/bookshelf.png');
@@ -164,8 +355,7 @@ const styles = StyleSheet.create(
           alignItems: 'center',
           justifyContent: 'center',
           paddingTop: ( Platform.OS === 'ios' ) ? 20 : 0
-      },
-   
+      },  
       bottomView:{
    
         width: '100%', 
@@ -176,7 +366,19 @@ const styles = StyleSheet.create(
         position: 'absolute',
         bottom: 0
       },
-
+      item: {
+        //currently unused
+        backgroundColor: '#f9c2ff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 150,
+        height: 150,
+        flex: 1,
+        margin: 1,
+        //marginHorizontal: 5,
+        //marginVertical: 10,
+        //height: Dimensions.get('window').width - 175/5,
+      },
       imageStyle:{
         width: 150, 
         height: 150,
@@ -188,17 +390,24 @@ const styles = StyleSheet.create(
       scrollViewStyle:{
         flex: 1,
         marginHorizontal: 20,
-        marginVertical: 20
-        
+        marginVertical: 20       
       },
-
       textStyle:{
    
         color: '#fff',
         fontSize:22
+      },
+      row:{
+        backgroundColor: '#ffffff',
+        flex: 1,
+        justifyContent: "space-around",
+        //margin: 1,
+        marginHorizontal: 1,
+        marginVertical: 1,
       }
 
   });
 
+  
 //export default Social_Stories;
  
