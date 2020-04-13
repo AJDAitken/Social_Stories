@@ -1,15 +1,17 @@
 import React, { Component, useState } from 'react';
-//import SortableGrid from 'react-native-sortable-grid';
-import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, PanResponder, Animated} from 'react-native';
-import update from 'immutability-helper';
-//import 'react-native-gesture-handler';
+import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, Dimensions} from 'react-native';
+import SortableGrid from 'react-native-sortable-grid'
+//For handling image manipulation in the story grid
+import 'react-native-gesture-handler';
+
 import { render } from 'react-dom';
+
+//For nav within story_creation, new tab for each screen of the story
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
-
-
+//20 images imported - School, 20 images imported - Medical
   const schoolImages = [
     require('./assets/Images/School/backpack.png'),
     require('./assets/Images/School/basketball.png'),
@@ -31,9 +33,6 @@ import { createStackNavigator } from '@react-navigation/stack';
     require('./assets/Images/School/teacher.png'),
     require('./assets/Images/School/trumpet.png'),
     require('./assets/Images/School/uniform.png'),
-  ]
-  
-  const Medical = [
     require('./assets/Images/Medical/bacteria.png'),
     require('./assets/Images/Medical/band_aid.png'),
     require('./assets/Images/Medical/blood_donation.png'),
@@ -54,7 +53,29 @@ import { createStackNavigator } from '@react-navigation/stack';
     require('./assets/Images/Medical/test_tube.png'),
     require('./assets/Images/Medical/tooth.png'),
     require('./assets/Images/Medical/vision.png'),
+    require('./assets/Images/Design/computer_mouse.png'),
+    require('./assets/Images/Design/cube.png'),
+    require('./assets/Images/Design/desk.png'),
+    require('./assets/Images/Design/graphic_design.png'),
+    require('./assets/Images/Design/graphic_tool_1.png'),
+    require('./assets/Images/Design/graphic_tool.png'),
+    require('./assets/Images/Design/idea.png'),
+    require('./assets/Images/Design/laptop.png'),
+    require('./assets/Images/Design/layers.png'),
+    require('./assets/Images/Design/list.png'),
+    require('./assets/Images/Design/paint_brush.png'),
+    require('./assets/Images/Design/pantone.png'),
+    require('./assets/Images/Design/pencil_case.png'),
+    require('./assets/Images/Design/photo_camera.png'),
+    require('./assets/Images/Design/picture.png'),
+    require('./assets/Images/Design/rgb.png'),
+    require('./assets/Images/Design/smartphone.png'),
+    require('./assets/Images/Design/tablet.png'),
+    require('./assets/Images/Design/vector_1.png'),
+    require('./assets/Images/Design/vector.png'),
   ]
+ 
+  
 
 function Item({ imageSource }) {
     
@@ -69,7 +90,7 @@ function Item({ imageSource }) {
 const Story_Creation = () =>{
   
 
-  //KEEP MINAMISED - will refactor later if time, dont judge my hard coded rubbish
+  //KEEP MINAMISED - will refactor later if time, need hard code for testing for testing
     const initialGrid = [
       {
       id: '0',
@@ -223,39 +244,84 @@ const Story_Creation = () =>{
       },
     ];
 
+    //Set up references and states (done once per grid)
   const [currentGrid, setGrid]= useState(initialGrid);
-
+  const scroll = React.createRef();
   
-    addImage = (src,index, initialGrid) =>{
+    addImage = (src,index, theGrid) =>{
 
       console.log("GOT TO ADDIMAGE METHOD");
-      //console.log(src,index, initialGrid);
+      //console.log(src,index, theGrid);
 
-      const tempGrid = [...initialGrid];
+      const tempGrid = [...theGrid];
       let i = tempGrid.findIndex(tempGrid => tempGrid.imageSource === 'blank');
       console.log("First empty space in the grid: ", i);
       tempGrid[i] = {...tempGrid[i], imageSource: (schoolImages[src, index])};
       //console.log(tempGrid);
       
       setGrid(tempGrid);
-      //this.setState({initialGrid: tempGrid});
-       
+      
+      
+  }
+
+  gridDelete = (index, theGrid) => {
+    
+    console.log("GOT TO gridDelete METHOD");
+      //console.log(src,index, theGrid);
+
+      const tempGrid = [...theGrid];
+   //let i = tempGrid.findIndex(tempGrid => tempGrid.imageSource === (schoolImages[src, index]));
+
+      tempGrid[index] = {...tempGrid[index], imageSource: 'blank'};
+      //console.log(tempGrid);
+      
+      setGrid(tempGrid);
+  }
+  
+  goToSchool = () => {
+    console.log("Got to goToSchool (scrollTo method)");
+    scroll.current.scrollTo({x:0, y:0, animated: true });
+  }
+
+  goToMedical = () => {
+    console.log("Got to goToMedical (scrollTo method)");
+    scroll.current.scrollTo({x:3000, y:0, animated: true });
+  }
+
+  goToDesign = () => {
+    console.log("Got to goToDesign (scrollTo method)");
+    scroll.current.scrollTo({x:6000, y:0, animated: true });
   }
 
   return (
     
     <SafeAreaView style={{ flex: 1, margin: (10,10,10,10)}}> 
-      <FlatList
-      data={currentGrid}
-      //extraData={}
-      renderItem={({ item }) => <Item imageSource={item.imageSource}/>}
-      keyExtractor={item => item.id}
-      numColumns={5}
-      columnWrapperStyle={styles.row}
-      />
-    
+    <SortableGrid 
+        style={ flex = 6}
+        blockTransitionDuration = { 400 }
+        activeBlockCenteringDuration = { 200 }
+        itemsPerRow = { 5 }
+        >
+          {
+            currentGrid.map( (picture_name, index) =>
+
+              <View key={index}  onTap = {this.gridDelete.bind(this, index, currentGrid)}> 
+                
+                  <Image source={picture_name.imageSource} style={{width: 150, height: 150}}/>
+              </View>
+              )
+          }
+        </SortableGrid>
+
+    <View>
+        <View style = {styles.scrollButtonFlex}>
+          <Button onPress={goToSchool}style = {styles.scrollButton} title="School" />
+          <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" />
+          <Button onPress={goToDesign} style = {styles.scrollButton} title="Design" />
+        </View>
+    </View>
       <View style={styles.bottomView}>
-        <ScrollView  style={styles.scrollViewStyle} horizontal={true}> 
+        <ScrollView style={styles.scrollViewStyle} ref={scroll} horizontal={true}> 
 
         
         {
@@ -284,171 +350,61 @@ const Story_Creation = () =>{
         
 }
 
+
+function Screen_1() {
+  return (
+    Story_Creation()
+  );
+}
+function Screen_2() {
+  return (
+    Story_Creation()
+  );
+}
+function Screen_3() {
+  return (
+    Story_Creation()
+  );
+}
+function Screen_4() {
+  return (
+    Story_Creation()
+  );
+}
+function Screen_5() {
+  return (
+    Story_Creation()
+  );
+}
+function Screen_6() {
+  return (
+    Story_Creation()
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
 class Social_Story_Creation extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            initialGrid: [
-              {
-              id: '0',
-              title: 'Grid 0',
-              imageSource: '',
-              },
-              {
-              id: '1',
-              title: 'Grid 1',
-              imageSource: '',
-              },
-              {
-              id: '2',
-              title: 'Grid 2',
-              imageSource: '',
-              },
-              {
-              id: '3',
-              title: 'Grid 3',
-              imageSource: require('./assets/Images/School/ebook_1.png'),
-              },
-              {
-              id: '4',
-              title: 'test5',
-              imageSource: '',
-              },
-              {
-              id: '5',
-              title: 'test6',
-              imageSource: '',
-              },
-              {
-              id: '6',
-              title: 'test7',
-              imageSource: '',
-              },
-              {
-              id: '7',
-              title: 'test8',
-              imageSource: '',
-              },
-              {
-              id: '8',
-              title: 'test9',
-              imageSource: '',
-              },
-              {
-              id: '9',
-              title: 'test10',
-              imageSource: '',
-              },
-              {
-              id: '10',
-              title: 'Grid 0',
-              imageSource: '',
-              },
-              {
-              id: '11',
-              title: 'Grid 1',
-              imageSource: '',
-              },
-              {
-              id: '12',
-              title: 'test3',
-              imageSource: '',
-              },
-              {
-              id: '13',
-              title: 'test4',
-              imageSource: '',
-              },
-              {
-              id: '14',
-              title: 'test5',
-              imageSource: '',
-              },
-              {
-              id: '15',
-              title: 'test6',
-              imageSource: '',
-              },
-              {
-              id: '16',
-              title: 'test7',
-              imageSource: '',
-              },
-              {
-              id: '17',
-              title: 'test8',
-              imageSource: '',
-              },
-              {
-              id: '18',
-              title: 'test9',
-              imageSource: '',
-              },
-              {
-              id: '19',
-              title: 'test10',
-              imageSource: '',
-              },
-              {
-              id: '20',
-              title: 'Grid 0',
-              imageSource: '',
-              },
-              {
-              id: '21',
-              title: 'Grid 1',
-              imageSource: '',
-              },
-              {
-              id: '22',
-              title: 'test3',
-              imageSource: '',
-              },
-              {
-              id: '23',
-              title: 'test4',
-              imageSource: '',
-              },
-              {
-              id: '24',
-              title: 'test5',
-              imageSource: '',
-              },
-              {
-              id: '25',
-              title: 'test6',
-              imageSource: '',
-              },
-              {
-              id: '26',
-              title: 'test7',
-              imageSource: '',
-              },
-              {
-              id: '27',
-              title: 'test8',
-              imageSource: '',
-              },
-              {
-              id: '28',
-              title: 'test9',
-              imageSource: '',
-              },
-              {
-              id: '29',
-              title: 'test10',
-              imageSource: '',
-              },
-          ]
+        
         
         };
-        //this.updateGrid = this.updateGrid.bind(this);
         
-    }
-    
+        
+    //Renders the bottom tab bar, which creates its own story grid for each tab to form a 'full story'
       render(){
         return(
-          Story_Creation()
+          <NavigationContainer independent={true}>
+           <Tab.Navigator>
+              <Tab.Screen name="Screen One" component={Screen_1} />
+              <Tab.Screen name="Screen Two" component={Screen_2} />
+              <Tab.Screen name="Screen Three" component={Screen_3} />
+              <Tab.Screen name="Screen Four" component={Screen_4} />
+              <Tab.Screen name="Screen Five" component={Screen_5} />
+              <Tab.Screen name="Screen Six" component={Screen_6} />
+           </Tab.Navigator>
+          </NavigationContainer>
         );
     }
 
@@ -502,6 +458,7 @@ export default story;
         },
   
         scrollViewStyle:{
+          paddingTop: 10,
           flex: 1,
           marginHorizontal: 20,
           marginVertical: 20       
@@ -511,13 +468,27 @@ export default story;
           color: '#fff',
           fontSize:22
         },
-        row:{
+        row:{ 
           backgroundColor: '#ffffff',
           flex: 1,
           justifyContent: "space-around",
           //margin: 1,
           marginHorizontal: 1,
           marginVertical: 1,
+        },
+        scrollButtonFlex:{
+          //flush out style later
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          position:"relative",
+          
+          flexWrap:"wrap", //incase too many buttons for one line, make new line
+          //width: 1000,
+          height: 40,
+        },
+        scrollButton:{
+          paddingRight: 75,
         }
   
     });

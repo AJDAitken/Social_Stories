@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import story from'./Story_Creation';
 import { render } from 'react-dom';
-import Carousel from 'react-native-snap-carousel';
+
 
 
 
