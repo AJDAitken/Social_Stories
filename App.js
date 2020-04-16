@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 //import SortableGrid from 'react-native-sortable-grid';
 import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, PanResponder, Animated} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import story from'./Story_Creation';
+import archive from'./Archive';
+//import archiveArray from'./Story_Creation';
 import { render } from 'react-dom';
-
+//import {Screen_1, Screen_2, Screen_3, Screen_4, Screen_5, Screen_6} from './Story_Creation'
 
 
 
@@ -35,21 +37,20 @@ function HomeScreen({navigation}) {
 }
 
 
-const Stack = createStackNavigator();
+
 
 function New_Story_Details({navigation}) {
   return (
-
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Story Details Screen</Text> 
-      <View>
-        <Button
-          title="Go to Story Creation"
-          onPress={() => navigation.navigate('Story Creation')}
-        />     
-        </View>
-    </View> 
-
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Story Details Screen</Text> 
+        <View>
+          <Button
+            title="Go to Story Creation"
+            onPress={() => navigation.navigate('Story Creation')}
+          />     
+          </View>
+      </View> 
+    
   );
 }
 
@@ -73,16 +74,8 @@ function How_To_Story(){
   );
 }
 
-function Archive(){
-  return(
-    <View>
-      <Text>
-        Placeholder for the archive
-      </Text>
-    </View>
-    );
 
-}
+const Stack = createStackNavigator();
 
 
 export default class Social_Stories extends React.Component{
@@ -92,6 +85,7 @@ export default class Social_Stories extends React.Component{
 }
 
   render(){
+
     return (
       <NavigationContainer>
         <Stack.Navigator>
@@ -100,21 +94,13 @@ export default class Social_Stories extends React.Component{
           <Stack.Screen name="Story Creation" component={story.render} />
           <Stack.Screen name="Tutorial" component={Tutorial} />
           <Stack.Screen name="How To Story" component={How_To_Story} />
-          <Stack.Screen name="Archive" component={Archive} />
+          <Stack.Screen name="Archive" component={archive.render} />
         </Stack.Navigator>
       </NavigationContainer>
     );
     }
     
 }
-
-
-//considered good practice to source images before use, not during
-const backpack = require('./assets/Images/School/backpack.png');
-const basketball = require('./assets/Images/School/basketball.png');
-const book = require('./assets/Images/School/book.png');
-const bookshelf =  require('./assets/Images/School/bookshelf.png');
-const desktop =  require('./assets/Images/School/desktop.png');
 
 const styles = StyleSheet.create(
   {

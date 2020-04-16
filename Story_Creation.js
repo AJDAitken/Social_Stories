@@ -1,18 +1,18 @@
 import React, { Component, useState } from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, Dimensions} from 'react-native';
+import { StyleSheet, NavigationActions, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, Dimensions} from 'react-native';
 import SortableGrid from 'react-native-sortable-grid'
 //For handling image manipulation in the story grid
 import 'react-native-gesture-handler';
 
 import { render } from 'react-dom';
-
+import ViewShot from "react-native-view-shot";
 //For nav within story_creation, new tab for each screen of the story
-import { NavigationContainer } from '@react-navigation/native';
+//import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import archive from './Archive';
 
 //20 images imported - School, 20 images imported - Medical
-  const schoolImages = [
+  const storyImages = [
     require('./assets/Images/School/backpack.png'),
     require('./assets/Images/School/basketball.png'),
     require('./assets/Images/School/book.png'),
@@ -76,21 +76,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
   ]
  
   
+const archiveArray = [];
 
-function Item({ imageSource }) {
-    
-    return(
-      <View style={styles.row}>
-        <Image source={imageSource} style={styles.imageStyle}  />       
-      </View>
-    );
-  
-  }
-  
-const Story_Creation = () =>{
+const Story_Creation = ()=>{
   
 
-  //KEEP MINAMISED - will refactor later if time, need hard code for testing for testing
+  //KEEP MINAMISED - will refactor later if time, need hard code for testing 
     const initialGrid = [
       {
       id: '0',
@@ -217,37 +208,27 @@ const Story_Creation = () =>{
       title: 'test5',
       imageSource: 'blank',
       },
-      {
-      id: '25',
-      title: 'test6',
-      imageSource: 'blank',
-      },
-      {
-      id: '26',
-      title: 'test7',
-      imageSource: 'blank',
-      },
-      {
-      id: '27',
-      title: 'test8',
-      imageSource: 'blank',
-      },
-      {
-      id: '28',
-      title: 'test9',
-      imageSource: 'blank',
-      },
-      {
-      id: '29',
-      title: 'test10',
-      imageSource: 'blank',
-      },
     ];
 
     //Set up references and states (done once per grid)
   const [currentGrid, setGrid]= useState(initialGrid);
   const scroll = React.createRef();
-  
+  const storyCapture = React.createRef();
+
+  saveToArchive = (storyCapture) =>{
+    console.log("Got to Save to Archive (in story_creation)");
+    storyCapture.onCapture = uri =>{
+      archiveArray.push(imageSource = uri);
+      archive.render(archiveArray);
+      
+    }
+    
+    //console.log(archiveArray);
+
+    
+
+  } 
+
     addImage = (src,index, theGrid) =>{
 
       console.log("GOT TO ADDIMAGE METHOD");
@@ -256,7 +237,7 @@ const Story_Creation = () =>{
       const tempGrid = [...theGrid];
       let i = tempGrid.findIndex(tempGrid => tempGrid.imageSource === 'blank');
       console.log("First empty space in the grid: ", i);
-      tempGrid[i] = {...tempGrid[i], imageSource: (schoolImages[src, index])};
+      tempGrid[i] = {...tempGrid[i], imageSource: (storyImages[src, index])};
       //console.log(tempGrid);
       
       setGrid(tempGrid);
@@ -270,7 +251,6 @@ const Story_Creation = () =>{
       //console.log(src,index, theGrid);
 
       const tempGrid = [...theGrid];
-   //let i = tempGrid.findIndex(tempGrid => tempGrid.imageSource === (schoolImages[src, index]));
 
       tempGrid[index] = {...tempGrid[index], imageSource: 'blank'};
       //console.log(tempGrid);
@@ -293,54 +273,59 @@ const Story_Creation = () =>{
     scroll.current.scrollTo({x:6000, y:0, animated: true });
   }
 
+  
+
   return (
-    
-    <SafeAreaView style={{ flex: 1, margin: (10,10,10,10)}}> 
-    <SortableGrid 
-        style={ flex = 6}
-        blockTransitionDuration = { 400 }
-        activeBlockCenteringDuration = { 200 }
-        itemsPerRow = { 5 }
-        >
-          {
-            currentGrid.map( (picture_name, index) =>
+    <SafeAreaView collapsable={false} style={{ flex: 1, margin: (10,10,10,10)}}> 
 
-              <View key={index}  onTap = {this.gridDelete.bind(this, index, currentGrid)}> 
-                
-                  <Image source={picture_name.imageSource} style={{width: 150, height: 150}}/>
-              </View>
-              )
-          }
-        </SortableGrid>
-
-    <View>
-        <View style = {styles.scrollButtonFlex}>
-          <Button onPress={goToSchool}style = {styles.scrollButton} title="School" />
-          <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" />
-          <Button onPress={goToDesign} style = {styles.scrollButton} title="Design" />
-        </View>
+    <View style = {styles.topRightButton}>
+      <Button onPress={saveToArchive.bind(storyCapture)} style = {styles.topRightButton} title="Save To Archive" />
     </View>
-      <View style={styles.bottomView}>
-        <ScrollView style={styles.scrollViewStyle} ref={scroll} horizontal={true}> 
+    <ViewShot ref= {storyCapture} options={{ format: "jpg", quality: 0.9, result: "data-uri" }}>
+        <SortableGrid 
+            style= {styles.gridContainer}
+            blockTransitionDuration = { 400 }
+            activeBlockCenteringDuration = { 200 }
+            itemsPerRow = { 5 }
+            >
+              {
+                currentGrid.map( (picture_name, index) =>
 
-        
-        {
-          //this.addImage.bind(this, src, index)
-          //prints out the schoolImage array, may chnage to drag and drop system
-            schoolImages.map( (src, index) =>
-                
-              <View key={index} > 
-                <TouchableOpacity onPress ={this.addImage.bind(this, src, index, currentGrid)} style={styles.imageStyle} >
-                  
-                  <Image source={src} style={styles.imageStyle}/>
-                  
-                </TouchableOpacity>
-              </View>
-              )
-          } 
-                   
-        </ScrollView>
-        
+                  <View key={index}  onTap = {this.gridDelete.bind(this, index, currentGrid)}> 
+                    
+                      <Image source={picture_name.imageSource} style={{width: 150, height: 150}}/>
+                  </View>
+                  )
+              }
+          </SortableGrid>        
+      </ViewShot>
+      <View style={styles.bottomView}>
+          <View style = {styles.scrollButtonFlex}>
+            <Button onPress={goToSchool}style = {styles.scrollButton} title="School" />
+            <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" />
+            <Button onPress={goToDesign} style = {styles.scrollButton} title="Design" />
+          </View>
+          <View style = {{position: 'absolute', bottom: 0 }}>
+            <ScrollView style={styles.scrollViewStyle} ref={scroll} horizontal={true}> 
+
+            
+            {
+              //this.addImage.bind(this, src, index)
+              //prints out the storyImages array, may chnage to drag and drop system
+                storyImages.map( (src, index) =>
+                    
+                  <View key={index} > 
+                    <TouchableOpacity onPress ={this.addImage.bind(this, src, index, currentGrid)} style={styles.imageStyle} >
+                      
+                      <Image source={src} style={styles.imageStyle}/>
+                      
+                    </TouchableOpacity>
+                  </View>
+                  )
+              } 
+                      
+            </ScrollView>
+            </View>
       </View>   
     </SafeAreaView>
     
@@ -394,9 +379,12 @@ class Social_Story_Creation extends Component{
         
     //Renders the bottom tab bar, which creates its own story grid for each tab to form a 'full story'
       render(){
+        
         return(
-          <NavigationContainer independent={true}>
+          //<NavigationContainer independent={false}>
+          
            <Tab.Navigator>
+             
               <Tab.Screen name="Screen One" component={Screen_1} />
               <Tab.Screen name="Screen Two" component={Screen_2} />
               <Tab.Screen name="Screen Three" component={Screen_3} />
@@ -404,7 +392,8 @@ class Social_Story_Creation extends Component{
               <Tab.Screen name="Screen Five" component={Screen_5} />
               <Tab.Screen name="Screen Six" component={Screen_6} />
            </Tab.Navigator>
-          </NavigationContainer>
+           
+          //</NavigationContainer>
         );
     }
 
@@ -425,14 +414,19 @@ export default story;
             alignItems: 'center',
             justifyContent: 'center',
             paddingTop: ( Platform.OS === 'ios' ) ? 20 : 0
-        },  
+        }, 
+         gridContainer:{
+          borderWidth:1,
+          borderColor: '#d3d3d3',
+          //flex = 6,
+         },
         bottomView:{
      
           width: '100%', 
-          height: 175, 
+          height: '20%', 
           backgroundColor: '#808080',
-           
-          alignItems: 'flex-start',       
+          justifyContent:'space-around',
+          alignItems: 'center',       
           position: 'absolute',
           bottom: 0
         },
@@ -459,9 +453,10 @@ export default story;
   
         scrollViewStyle:{
           paddingTop: 10,
-          flex: 1,
-          marginHorizontal: 20,
-          marginVertical: 20       
+          //flex: 1,
+          position:"relative",
+          marginHorizontal: 10,
+          //marginVertical: 10,     
         },
         textStyle:{
      
@@ -477,18 +472,25 @@ export default story;
           marginVertical: 1,
         },
         scrollButtonFlex:{
-          //flush out style later
+          //flex:1,
+          justifyContent: 'space-around',
           flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center",
           position:"relative",
-          
+          marginBottom:100,
           flexWrap:"wrap", //incase too many buttons for one line, make new line
           //width: 1000,
-          height: 40,
+          height: 100,
         },
         scrollButton:{
-          paddingRight: 75,
+          //paddingRight: 75,
+          //height: "50%",
+        },
+        topRightButton:{
+          flexDirection: "row-reverse",
+          width: 120,
+          height: 40,
         }
   
     });
+
+    
