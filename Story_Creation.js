@@ -216,10 +216,11 @@ const Story_Creation = ()=>{
   const storyCapture = React.createRef();
 
   saveToArchive = (storyCapture) =>{
-    console.log("Got to Save to Archive (in story_creation)");
-    storyCapture.onCapture = uri =>{
+    console.log("Got to Save to Archive (in story_creation)", storyCapture);
+    storyCapture.onCapture=(uri)=>{
       archiveArray.push(imageSource = uri);
       archive.render(archiveArray);
+      console.log(uri);
       
     }
     
@@ -276,12 +277,13 @@ const Story_Creation = ()=>{
   
 
   return (
-    <SafeAreaView collapsable={false} style={{ flex: 1, margin: (10,10,10,10)}}> 
+    <SafeAreaView style={{ flex: 1, margin: (10,10,10,10)}}> 
 
     <View style = {styles.topRightButton}>
       <Button onPress={saveToArchive.bind(storyCapture)} style = {styles.topRightButton} title="Save To Archive" />
     </View>
-    <ViewShot ref= {storyCapture} options={{ format: "jpg", quality: 0.9, result: "data-uri" }}>
+    <ViewShot ref = {storyCapture} options={{ format: "jpg", quality: 0.9, result: "data-uri" }}>
+        <View collapsable={false} >
         <SortableGrid 
             style= {styles.gridContainer}
             blockTransitionDuration = { 400 }
@@ -297,7 +299,8 @@ const Story_Creation = ()=>{
                   </View>
                   )
               }
-          </SortableGrid>        
+          </SortableGrid> 
+          </View>       
       </ViewShot>
       <View style={styles.bottomView}>
           <View style = {styles.scrollButtonFlex}>

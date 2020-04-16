@@ -16,23 +16,7 @@ function addToArchive(archiveArray){
     
     return(
             <View>
-                <FlatList
-                    data={archiveArray}
-                    //extraData={}
-                    renderItem={({ item }) => <Item imageSource={item.imageSource}/>}
-                    keyExtractor={item => item.id}
-                    numColumns={5}
-                    columnWrapperStyle={styles.row}
-                />
-                {
-                archiveArray.map( (picture_name, index) =>
-
-                  <View key={index} > 
-                    
-                      <Image source={picture_name.imageSource} style={{width: 150, height: 150}}/>
-                  </View>
-                  )
-              }
+                <Image source={archiveArray} style={{width: 250, height: 250}}/>
             </View>
     )
 }
