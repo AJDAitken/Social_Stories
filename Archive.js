@@ -3,23 +3,6 @@ import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollV
 import { render } from 'react-dom';
 
 
-  
-function addToArchive(archiveArray){
-    
-      
-    
-    //console.log(archiveArray);
-
-    //function setNewStory(archiveArray){
-    //    setStory(archiveArray);
-    //} 
-    
-    return(
-            <View>
-                <Image source={archiveArray} style={{width: 250, height: 250}}/>
-            </View>
-    )
-}
 
 function Item({ imageSource }) {
     
@@ -38,31 +21,165 @@ class ArchiveClass extends Component{
         
         };
     
-    arrayState(){
-        const [currentStory, setStory]= useState(archiveArray);
-
-        const changeOfStory = async archiveArray => {
-          await setStory(archiveArray);
-        const [currentStory, setStory]= useState(archiveArray);
-          addToArchive(currentStory);
+        isSet(archiveArray){
+          if(currentGrid != archiveArray){
+            setGrid(archiveArray);
+            }
+            return currentGrid;
         }
-
-        //creates an infinite loop
-        if(archiveArray != null){
-          changeOfStory();   
-        }
-        else{
-          console.log("ERROR: Array not passed correctly");
-        };
-    }
         
       render(archiveArray){
+
+        const [currentGrid, setGrid]= useState(initialGrid);
+        
+        
+        
+        const initialGrid = [
+          {
+          id: '0',
+          title: 'Grid 0',
+          imageSource: 'blank',
+          },
+          {
+          id: '1',
+          title: 'Grid 1',
+          imageSource: 'blank',
+          },
+          {
+          id: '2',
+          title: 'Grid 2',
+          imageSource: 'blank',
+          },
+          {
+          id: '3',
+          title: 'Grid 3',
+          imageSource: 'blank',
+          },
+          {
+          id: '4',
+          title: 'test5',
+          imageSource: 'blank',
+          },
+          {
+          id: '5',
+          title: 'test6',
+          imageSource: 'blank',
+          },
+          {
+          id: '6',
+          title: 'test7',
+          imageSource: 'blank',
+          },
+          {
+          id: '7',
+          title: 'test8',
+          imageSource: 'blank',
+          },
+          {
+          id: '8',
+          title: 'test9',
+          imageSource: 'blank',
+          },
+          {
+          id: '9',
+          title: 'test10',
+          imageSource: 'blank',
+          },
+          {
+          id: '10',
+          title: 'Grid 0',
+          imageSource: 'blank',
+          },
+          {
+          id: '11',
+          title: 'Grid 1',
+          imageSource: 'blank',
+          },
+          {
+          id: '12',
+          title: 'test3',
+          imageSource: 'blank',
+          },
+          {
+          id: '13',
+          title: 'test4',
+          imageSource: 'blank',
+          },
+          {
+          id: '14',
+          title: 'test5',
+          imageSource: 'blank',
+          },
+          {
+          id: '15',
+          title: 'test6',
+          imageSource: 'blank',
+          },
+          {
+          id: '16',
+          title: 'test7',
+          imageSource: 'blank',
+          },
+          {
+          id: '17',
+          title: 'test8',
+          imageSource: 'blank',
+          },
+          {
+          id: '18',
+          title: 'test9',
+          imageSource: 'blank',
+          },
+          {
+          id: '19',
+          title: 'test10',
+          imageSource: 'blank',
+          },
+          {
+          id: '20',
+          title: 'Grid 0',
+          imageSource: 'blank',
+          },
+          {
+          id: '21',
+          title: 'Grid 1',
+          imageSource: 'blank',
+          },
+          {
+          id: '22',
+          title: 'test3',
+          imageSource: 'blank',
+          },
+          {
+          id: '23',
+          title: 'test4',
+          imageSource: 'blank',
+          },
+          {
+          id: '24',
+          title: 'test5',
+          imageSource: 'blank',
+          },
+        ];
         return(
-
-          addToArchive(archiveArray)
-
+         <View>
+              <Image source={archiveArray} style={{height:500, width:500}}/>
+                  <FlatList
+                  data={currentGrid}
+                  style={styles.gridContainer}
+                  //extraData={}
+                  renderItem={({ item }) =><View ><Item imageSource={item.imageSource}/></View> }
+                  keyExtractor={item => item.id}
+                  numColumns={5}
+                  columnWrapperStyle={styles.row}
+                  
+                  />
+                
+                
+                
+        </View>
         );
-    }
+      }
 
 }
 

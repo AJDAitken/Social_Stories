@@ -1,6 +1,8 @@
-import React, { Component, useState } from 'react';
-import { StyleSheet, NavigationActions, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, Dimensions} from 'react-native';
-import SortableGrid from 'react-native-sortable-grid'
+import React, { Component, useState, useRef, CameraRoll} from 'react';
+import { StyleSheet, TextInput, PanResponder, Animated, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, Dimensions} from 'react-native';
+
+// uninstal if can change sortable grid to panresponder flatlist
+//import SortableGrid from 'react-native-sortable-grid'
 //For handling image manipulation in the story grid
 import 'react-native-gesture-handler';
 
@@ -10,6 +12,7 @@ import ViewShot from "react-native-view-shot";
 //import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import archive from './Archive';
+//import RNFetchBlob from 'react-native-fetch-blob'
 
 //20 images imported - School, 20 images imported - Medical
   const storyImages = [
@@ -74,12 +77,14 @@ import archive from './Archive';
     require('./assets/Images/Design/vector_1.png'),
     require('./assets/Images/Design/vector.png'),
   ]
- 
   
 const archiveArray = [];
 
+
+
 const Story_Creation = ()=>{
   
+
 
   //KEEP MINAMISED - will refactor later if time, need hard code for testing 
     const initialGrid = [
@@ -214,21 +219,38 @@ const Story_Creation = ()=>{
   const [currentGrid, setGrid]= useState(initialGrid);
   const scroll = React.createRef();
   const storyCapture = React.createRef();
+  const [currentTitleText, onChangeTitleText] = React.useState('Title');
+  const [currentContextText, onChangeContextText] = React.useState('Add some context for your story!');
 
-  saveToArchive = (storyCapture) =>{
-    console.log("Got to Save to Archive (in story_creation)", storyCapture);
-    storyCapture.onCapture=(uri)=>{
-      archiveArray.push(imageSource = uri);
-      archive.render(archiveArray);
-      console.log(uri);
-      
+  saveToCameraRoll = (storyCapture) => {
+    storyCapture.Capture().then(uri =>{
+      CameraRoll.saveToCameraRoll(uri)
+      .then(Alert.alert('Success', 'Photo added to camera roll!'))
+    
     }
+  )
+    //storyCapture.Capture().then(image =>{
+      //CameraRoll.saveToCameraRoll(uri)
+      //.then(Alert.alert('Success', 'Photo added to camera roll!'))
+      console.log("got to saveToCameraRoll");
     
-    //console.log(archiveArray);
-
+      
     
+    //} )
+    
+  }
 
-  } 
+  //saveToArchive = (storyCapture) =>{
+    //console.log("got to saveToArchive1");
+    //console.log("Got to Save to Archive (in story_creation)", storyCapture);
+    //storyCapture.onCapture=(uri)=>{
+      
+      //saveToCameraRoll(uri);
+      
+      //console.log("got to saveToArchive2"); 
+    //}
+
+  //} 
 
     addImage = (src,index, theGrid) =>{
 
@@ -246,17 +268,18 @@ const Story_Creation = ()=>{
       
   }
 
-  gridDelete = (index, theGrid) => {
+  gridDelete = () => {
     
     console.log("GOT TO gridDelete METHOD");
+      //The code below is from a previous (working) attempt, left in incase I want to use the functionality else where later on
       //console.log(src,index, theGrid);
 
-      const tempGrid = [...theGrid];
+      //const tempGrid = [...theGrid];
 
-      tempGrid[index] = {...tempGrid[index], imageSource: 'blank'};
+      //tempGrid[index] = {...tempGrid[index], imageSource: 'blank'};
       //console.log(tempGrid);
-      
-      setGrid(tempGrid);
+      //Wipe grid instead of deleting specific items
+      setGrid(initialGrid);
   }
   
   goToSchool = () => {
@@ -278,30 +301,50 @@ const Story_Creation = ()=>{
 
   return (
     <SafeAreaView style={{ flex: 1, margin: (10,10,10,10)}}> 
+    <View style={styles.topBar}>
+        <View style = {styles.topButton}>
+          <Button onPress={this.gridDelete.bind(this)} 
+          title="Clear Screen" 
+          />
+        </View>
+        <View>
+          <TextInput style={styles.titleBox} 
+          onChangeText={text => onChangeTitleText(text)}
+          value={currentTitleText}
+          />
+        </View>
 
-    <View style = {styles.topRightButton}>
-      <Button onPress={saveToArchive.bind(storyCapture)} style = {styles.topRightButton} title="Save To Archive" />
+        <View style = {{height: 50, width:120}}>
+          <Button onPress={saveToCameraRoll.bind(storyCapture)} 
+          title="Save To Archive" 
+          />
+          
+        </View>
+        
     </View>
-    <ViewShot ref = {storyCapture} options={{ format: "jpg", quality: 0.9, result: "data-uri" }}>
-        <View collapsable={false} >
-        <SortableGrid 
-            style= {styles.gridContainer}
-            blockTransitionDuration = { 400 }
-            activeBlockCenteringDuration = { 200 }
-            itemsPerRow = { 5 }
-            >
-              {
-                currentGrid.map( (picture_name, index) =>
+    <ViewShot ref={storyCapture} options={{ format: "jpg", quality: 0.9, result: "data-uri" }}>
+        
+        <Animated.View>
+        <FlatList
+            data={currentGrid}
+            style={styles.gridContainer}
+            //extraData={}
+            renderItem={({ item }) =><View ><Item imageSource={item.imageSource}/></View> }
+            keyExtractor={item => item.id}
+            numColumns={5}
+            columnWrapperStyle={styles.row}
+            
+            />
+         </Animated.View>           
 
-                  <View key={index}  onTap = {this.gridDelete.bind(this, index, currentGrid)}> 
-                    
-                      <Image source={picture_name.imageSource} style={{width: 150, height: 150}}/>
-                  </View>
-                  )
-              }
-          </SortableGrid> 
-          </View>       
-      </ViewShot>
+      <View>
+          <TextInput style={styles.contextBox} 
+          onChangeText={text => onChangeContextText(text)}
+          value={currentContextText}
+          />
+      </View>
+
+    </ViewShot>
       <View style={styles.bottomView}>
           <View style = {styles.scrollButtonFlex}>
             <Button onPress={goToSchool}style = {styles.scrollButton} title="School" />
@@ -338,6 +381,56 @@ const Story_Creation = ()=>{
         
 }
 
+function Item({ imageSource}) {
+  // The following code is partly taken from the react-native website for usage of panResponder
+  // https://reactnative.dev/docs/panresponder
+  const pan = useRef(new Animated.ValueXY()).current;
+  let _value = {x:0,y:0};
+  panListener = pan.addListener((value) => _value = value);
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (e, gestureState) => true,
+      onStartShouldSetPanResponder: (e, gestureState) => false,
+      //onMoveShouldSetPanResponder: () => true,
+      
+      onPanResponderGrant: (e, gestureState) => {
+        pan.setOffset({
+          x: pan.x._value,
+          y: pan.y._value
+        });
+      },
+      onPanResponderMove: Animated.event(
+        [
+          null,
+          { dx: pan.x, dy: pan.y }
+          
+        ], 
+        
+      ),
+      onPanResponderRelease: (e, gestureState) => {
+        
+        pan.flattenOffset({
+         // x: pan.x._value + gestureState.dx,
+          //y: pan.y._value + gestureState.dy
+        });
+       
+      }
+    })
+  ).current;
+
+  return( 
+    <View style={styles.row,{zIndex: 100}} {...panResponder.panHandlers}>
+      <TouchableOpacity style={{transform: [
+        { translateX: pan.x }, 
+        { translateY: pan.y }
+        ]}} >
+     <Image source={imageSource} style={styles.imageStyle}/>
+     </TouchableOpacity>       
+    </View>
+  );
+
+}
 
 function Screen_1() {
   return (
@@ -408,6 +501,8 @@ class Social_Story_Creation extends Component{
 const story = new Social_Story_Creation();
 export default story;
 
+
+
   //Copied over from app.js, will have unused styles
   const styles = StyleSheet.create(
     {
@@ -467,7 +562,8 @@ export default story;
           fontSize:22
         },
         row:{ 
-          backgroundColor: '#ffffff',
+          //backgroundColor: (255, 255, 255, 0.0),
+          zIndex: 0,
           flex: 1,
           justifyContent: "space-around",
           //margin: 1,
@@ -488,10 +584,33 @@ export default story;
           //paddingRight: 75,
           //height: "50%",
         },
-        topRightButton:{
-          flexDirection: "row-reverse",
+        topButton:{
+          
           width: 120,
-          height: 40,
+          
+          height: 50,
+        },
+        titleBox:{
+          height: 50 ,
+          //flex: 1,
+          width: 300,
+          borderWidth: 1,
+          borderColor: '#d3d3d3',
+          justifyContent: 'center'
+        },
+        topBar:{
+          flexDirection: 'row', 
+          justifyContent: 'space-around', 
+          margin: (10,10,10,10),
+        },
+        contextBox:{
+          height: 75 ,
+          //flex: 1,
+          width: '100%',
+          borderWidth: 1,
+          borderColor: '#d3d3d3',
+          alignItems: 'center',
+          margin: (10,0,10,0),
         }
   
     });
