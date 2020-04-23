@@ -16,6 +16,7 @@ import archive from './Archive';
 //import RNFetchBlob from 'react-native-fetch-blob'
 
 //20 images imported - School, 20 images imported - Medical, 20 images imported - Design, 20 images imported - Business, 
+//20 images imported - Arrows, 20 images imported - equipment, 40 images imported - AltMedical, 25 images imported - AltSchool
   const storyImages = [
     require('./assets/Images/School/backpack.png'),
     require('./assets/Images/School/basketball.png'),
@@ -97,6 +98,115 @@ import archive from './Archive';
     require('./assets/Images/Business/startup.png'),
     require('./assets/Images/Business/target.png'),
     require('./assets/Images/Business/teamwork.png'),
+    require('./assets/Images/Arrows/3d-up-arrow-1.png'),
+    require('./assets/Images/Arrows/back-drawn-arrow.png'),
+    require('./assets/Images/Arrows/check-mark-arrow.png'),
+    require('./assets/Images/Arrows/clockwise-drawn-arrow.png'),
+    require('./assets/Images/Arrows/curved-downward-arrow.png'),
+    require('./assets/Images/Arrows/curved-up-arrow-1.png'),
+    require('./assets/Images/Arrows/downward-rotation.png'),
+    require('./assets/Images/Arrows/loop-arrows-1.png'),
+    require('./assets/Images/Arrows/looping-arrows.png'),
+    require('./assets/Images/Arrows/right-arrow-2.png'),
+    require('./assets/Images/Arrows/right-arrow-outline.png'),
+    require('./assets/Images/Arrows/right-arrow.png'),
+    require('./assets/Images/Arrows/right-drawn-arrow.png'),
+    require('./assets/Images/Arrows/squiggly-arrow.png'),
+    require('./assets/Images/Arrows/turn-right-arrow.png'),
+    require('./assets/Images/Arrows/turn-right-arrow-1.png'),
+    require('./assets/Images/Arrows/turn-up-arrow.png'),
+    require('./assets/Images/Arrows/undulating-arrow.png'),
+    require('./assets/Images/Arrows/up-arrow.png'),
+    require('./assets/Images/Arrows/up-arrow-2.png'),
+    require('./assets/Images/Uncoloured_Equipment/calculator.png'),
+    require('./assets/Images/Uncoloured_Equipment/compass.png'),
+    require('./assets/Images/Uncoloured_Equipment/computer.png'),
+    require('./assets/Images/Uncoloured_Equipment/flask.png'),
+    require('./assets/Images/Uncoloured_Equipment/laptop.png'),
+    require('./assets/Images/Uncoloured_Equipment/microscope.png'),
+    require('./assets/Images/Uncoloured_Equipment/mouse.png'),
+    require('./assets/Images/Uncoloured_Equipment/notebook-1.png'),
+    require('./assets/Images/Uncoloured_Equipment/notebook-and-pencil.png'),
+    require('./assets/Images/Uncoloured_Equipment/notebook.png'),
+    require('./assets/Images/Uncoloured_Equipment/paint-brush.png'),
+    require('./assets/Images/Uncoloured_Equipment/paint-palette.png'),
+    require('./assets/Images/Uncoloured_Equipment/pen-1.png'),
+    require('./assets/Images/Uncoloured_Equipment/pencil-1.png'),
+    require('./assets/Images/Uncoloured_Equipment/protractor.png'),
+    require('./assets/Images/Uncoloured_Equipment/right-triangle.png'),
+    require('./assets/Images/Uncoloured_Equipment/ruler.png'),
+    require('./assets/Images/Uncoloured_Equipment/scissors.png'),
+    require('./assets/Images/Uncoloured_Equipment/sharpener.png'),
+    require('./assets/Images/Uncoloured_Equipment/writing-tools-1.png'),
+    require('./assets/Images/Uncoloured_Medical/back-side-of-legs.png'),
+    require('./assets/Images/Uncoloured_Medical/blood-transfusion.png'),
+    require('./assets/Images/Uncoloured_Medical/broken-bone.png'),
+    require('./assets/Images/Uncoloured_Medical/digestive-system.png'),
+    require('./assets/Images/Uncoloured_Medical/female-hair.png'),
+    require('./assets/Images/Uncoloured_Medical/female-pubis.png'),
+    require('./assets/Images/Uncoloured_Medical/female-trunk.png'),
+    require('./assets/Images/Uncoloured_Medical/foot-bones.png'),
+    require('./assets/Images/Uncoloured_Medical/hand-bones.png'),
+    require('./assets/Images/Uncoloured_Medical/human-abdomen.png'),
+    require('./assets/Images/Uncoloured_Medical/human-ankle.png'),
+    require('./assets/Images/Uncoloured_Medical/human-body-side.png'),
+    require('./assets/Images/Uncoloured_Medical/human-bone.png'),
+    require('./assets/Images/Uncoloured_Medical/human-buttocks.png'),
+    require('./assets/Images/Uncoloured_Medical/human-ear.png'),
+    require('./assets/Images/Uncoloured_Medical/human-eye.png'),
+    require('./assets/Images/Uncoloured_Medical/human-eyebrow.png'),
+    require('./assets/Images/Uncoloured_Medical/human-finger.png'),
+    require('./assets/Images/Uncoloured_Medical/human-lips.png'),
+    require('./assets/Images/Uncoloured_Medical/human-neck.png'),
+    require('./assets/Images/Uncoloured_Medical/human-skull.png'),
+    require('./assets/Images/Uncoloured_Medical/human-teeth.png'),
+    require('./assets/Images/Uncoloured_Medical/human-toe.png'),
+    require('./assets/Images/Uncoloured_Medical/large-intestine.png'),
+    require('./assets/Images/Uncoloured_Medical/small-intestine.png'),
+    require('./assets/Images/Uncoloured_Medical/long-nail.png'),
+    require('./assets/Images/Uncoloured_Medical/men-back.png'),
+    require('./assets/Images/Uncoloured_Medical/men-chest.png'),
+    require('./assets/Images/Uncoloured_Medical/men-elbow.png'),
+    require('./assets/Images/Uncoloured_Medical/men-hair.png'),
+    require('./assets/Images/Uncoloured_Medical/men-hand.png'),
+    require('./assets/Images/Uncoloured_Medical/men-knee.png'),
+    require('./assets/Images/Uncoloured_Medical/men-leg.png'),
+    require('./assets/Images/Uncoloured_Medical/men-shoulder.png'),
+    require('./assets/Images/Uncoloured_Medical/mouth-open.png'),
+    require('./assets/Images/Uncoloured_Medical/nose-side-view.png'),
+    require('./assets/Images/Uncoloured_Medical/respiratory-system.png'),
+    require('./assets/Images/Uncoloured_Medical/tongue-and-mouth.png'),
+    require('./assets/Images/Uncoloured_Medical/tonsil.png'),
+    require('./assets/Images/Uncoloured_Medical/tooth-and-gums.png'),
+    require('./assets/Images/Uncoloured_School/question.png'),
+    require('./assets/Images/Uncoloured_School/backpack.png'),
+    require('./assets/Images/Uncoloured_School/blackboard-1.png'),
+    require('./assets/Images/Uncoloured_School/blackboard.png'),
+    require('./assets/Images/Uncoloured_School/books.png'),
+    require('./assets/Images/Uncoloured_School/book-2.png'),
+    require('./assets/Images/Uncoloured_School/bus.png'),
+    require('./assets/Images/Uncoloured_School/diploma.png'),
+    require('./assets/Images/Uncoloured_School/diploma-1.png'),
+    require('./assets/Images/Uncoloured_School/medal.png'),
+    require('./assets/Images/Uncoloured_School/trophey.png'),
+    require('./assets/Images/Uncoloured_School/basketball.png'),
+    require('./assets/Images/Uncoloured_School/football.png'),
+    require('./assets/Images/Uncoloured_School/rugby-ball.png'), 
+    require('./assets/Images/Uncoloured_School/lamp.png'),
+    require('./assets/Images/Uncoloured_School/letter-a.png'),
+    require('./assets/Images/Uncoloured_School/letter-b.png'),
+    require('./assets/Images/Uncoloured_School/letter-c.png'),
+    require('./assets/Images/Uncoloured_School/number-1.png'),
+    require('./assets/Images/Uncoloured_School/number-2.png'),
+    require('./assets/Images/Uncoloured_School/number-3.png'),
+    require('./assets/Images/Uncoloured_School/light-bulb.png'),
+    require('./assets/Images/Uncoloured_School/magnifying-glass.png'),  
+    require('./assets/Images/Uncoloured_School/musical-note.png'),
+    require('./assets/Images/Uncoloured_School/musical-notes.png'),
+    
+    
+    
+    
   ]
   
 //const archiveArray = [];
@@ -281,8 +391,22 @@ const Story_Creation = ()=>{
     console.log("Got to goToBusiness (scrollTo method)");
     scroll.current.scrollTo({x:9000, y:0, animated: true });
   }
-
- 
+  goToArrows = () => {
+    console.log("Got to goToArrows (scrollTo method)");
+    scroll.current.scrollTo({x:12000, y:0, animated: true });
+  }
+  goToEquipment = () => {
+    console.log("Got to goToEquipment (scrollTo method)");
+    scroll.current.scrollTo({x:15000, y:0, animated: true });
+  }
+  goToAltMedical = () => {
+    console.log("Got to goToAltMedical (scrollTo method)");
+    scroll.current.scrollTo({x:18000, y:0, animated: true });
+  }
+  goToAltSchool = () => {
+    console.log("Got to goToAltSchool (scrollTo method)");
+    scroll.current.scrollTo({x:24000, y:0, animated: true });
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, margin: (10,10,10,10)}}> 
@@ -343,6 +467,10 @@ const Story_Creation = ()=>{
             <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" color="#000080"/>
             <Button onPress={goToDesign} style = {styles.scrollButton} title="Design" color="#000080"/>
             <Button onPress={goToBusiness} style = {styles.scrollButton} title="Business" color="#000080"/>
+            <Button onPress={goToArrows} style = {styles.scrollButton} title="Arrows" color="#000080"/>
+            <Button onPress={goToEquipment} style = {styles.scrollButton} title="Equipment" color="#000080"/>
+            <Button onPress={goToAltMedical} style = {styles.scrollButton} title="Alt Medical" color="#000080"/>
+            <Button onPress={goToAltSchool} style = {styles.scrollButton} title="Alt School" color="#000080"/>
           </View>
           <View style = {{position: 'absolute', bottom: 0 }}>
             <ScrollView style={styles.scrollViewStyle} ref={scroll} horizontal={true}> 
