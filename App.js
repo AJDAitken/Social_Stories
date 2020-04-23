@@ -14,24 +14,40 @@ import { render } from 'react-dom';
 
 function HomeScreen({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-      <Button
-        title="Go to Archive"
-        onPress={() => navigation.navigate('Archive')}
-      />
-      <Button
-        title="Tutorial"
-        onPress={() => navigation.navigate('Tutorial')}
-      />
-      <Button
-        title="What are Social Stories?"
-        onPress={() => navigation.navigate('How To Story')}
-      />
+
+      <View>
+        <Button
+          title="Go to Details"
+          onPress={() => navigation.navigate('Details')}
+          color="#000080"
+        />
+      </View>
+
+      <View>
+        <Button
+          title="Go to Archive"
+          onPress={() => navigation.navigate('Archive')}
+          color="#000080"
+        />
+      </View>
+
+      <View>
+        <Button
+          title="Tutorial"
+          onPress={() => navigation.navigate('Tutorial')}
+          color="#000080"
+        />
+      </View>
+
+      <View>
+        <Button
+          title="What are Social Stories?"
+          onPress={() => navigation.navigate('How To Story')}
+          color="#000080"
+        />
+      </View>
     </View>
   );
 }
@@ -47,6 +63,7 @@ function New_Story_Details({navigation}) {
           <Button
             title="Go to Story Creation"
             onPress={() => navigation.navigate('Story Creation')}
+            color="#000080"
           />     
           </View>
       </View> 

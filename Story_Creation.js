@@ -1,20 +1,21 @@
-import React, { Component, useState, useRef, CameraRoll} from 'react';
+import React, { Component, useState, useRef} from 'react';
 import { StyleSheet, TextInput, PanResponder, Animated, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, Dimensions} from 'react-native';
-
+import CameraRoll from "@react-native-community/cameraroll";
 // uninstal if can change sortable grid to panresponder flatlist
 //import SortableGrid from 'react-native-sortable-grid'
 //For handling image manipulation in the story grid
 import 'react-native-gesture-handler';
-
 import { render } from 'react-dom';
-import ViewShot from "react-native-view-shot";
+import { captureScreen }from "react-native-view-shot";
 //For nav within story_creation, new tab for each screen of the story
 //import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+//Archive has been removed in the current build as it is buggy
 import archive from './Archive';
 //import RNFetchBlob from 'react-native-fetch-blob'
 
-//20 images imported - School, 20 images imported - Medical
+//20 images imported - School, 20 images imported - Medical, 20 images imported - Design, 20 images imported - Business, 
   const storyImages = [
     require('./assets/Images/School/backpack.png'),
     require('./assets/Images/School/basketball.png'),
@@ -76,15 +77,34 @@ import archive from './Archive';
     require('./assets/Images/Design/tablet.png'),
     require('./assets/Images/Design/vector_1.png'),
     require('./assets/Images/Design/vector.png'),
+    require('./assets/Images/Business/analytics.png'),
+    require('./assets/Images/Business/bar-chart.png'),
+    require('./assets/Images/Business/businessman.png'),
+    require('./assets/Images/Business/chat.png'),
+    require('./assets/Images/Business/growth.png'),
+    require('./assets/Images/Business/handshake.png'),
+    require('./assets/Images/Business/hourglass.png'),
+    require('./assets/Images/Business/idea.png'),
+    require('./assets/Images/Business/keyword.png'),
+    require('./assets/Images/Business/laptop.png'),
+    require('./assets/Images/Business/like.png'),
+    require('./assets/Images/Business/medal.png'),
+    require('./assets/Images/Business/megaphone.png'),
+    require('./assets/Images/Business/mountains.png'),
+    require('./assets/Images/Business/placeholder.png'),
+    require('./assets/Images/Business/profits.png'),
+    require('./assets/Images/Business/settings.png'),
+    require('./assets/Images/Business/startup.png'),
+    require('./assets/Images/Business/target.png'),
+    require('./assets/Images/Business/teamwork.png'),
   ]
   
-const archiveArray = [];
+//const archiveArray = [];
 
 
 
 const Story_Creation = ()=>{
   
-
 
   //KEEP MINAMISED - will refactor later if time, need hard code for testing 
     const initialGrid = [
@@ -188,31 +208,7 @@ const Story_Creation = ()=>{
       title: 'test10',
       imageSource: 'blank',
       },
-      {
-      id: '20',
-      title: 'Grid 0',
-      imageSource: 'blank',
-      },
-      {
-      id: '21',
-      title: 'Grid 1',
-      imageSource: 'blank',
-      },
-      {
-      id: '22',
-      title: 'test3',
-      imageSource: 'blank',
-      },
-      {
-      id: '23',
-      title: 'test4',
-      imageSource: 'blank',
-      },
-      {
-      id: '24',
-      title: 'test5',
-      imageSource: 'blank',
-      },
+      
     ];
 
     //Set up references and states (done once per grid)
@@ -222,35 +218,20 @@ const Story_Creation = ()=>{
   const [currentTitleText, onChangeTitleText] = React.useState('Title');
   const [currentContextText, onChangeContextText] = React.useState('Add some context for your story!');
 
-  saveToCameraRoll = (storyCapture) => {
-    storyCapture.Capture().then(uri =>{
-      CameraRoll.saveToCameraRoll(uri)
-      .then(Alert.alert('Success', 'Photo added to camera roll!'))
-    
-    }
-  )
-    //storyCapture.Capture().then(image =>{
-      //CameraRoll.saveToCameraRoll(uri)
-      //.then(Alert.alert('Success', 'Photo added to camera roll!'))
-      console.log("got to saveToCameraRoll");
-    
+  saveToArchive = () =>{
+    captureScreen({
+      format: "jpg",
+      quality: 0.9,
+    }).then( uri=> {
+        CameraRoll.saveToCameraRoll(uri);
+        //.then(Alert.alert('Success', 'Photo added to camera roll!')),
+      //error => console.error("Screenshot failed", error)
+      });
       
+      //console.log("got to saveToArchive"); 
     
-    //} )
-    
-  }
 
-  //saveToArchive = (storyCapture) =>{
-    //console.log("got to saveToArchive1");
-    //console.log("Got to Save to Archive (in story_creation)", storyCapture);
-    //storyCapture.onCapture=(uri)=>{
-      
-      //saveToCameraRoll(uri);
-      
-      //console.log("got to saveToArchive2"); 
-    //}
-
-  //} 
+  } 
 
     addImage = (src,index, theGrid) =>{
 
@@ -296,15 +277,23 @@ const Story_Creation = ()=>{
     console.log("Got to goToDesign (scrollTo method)");
     scroll.current.scrollTo({x:6000, y:0, animated: true });
   }
+  goToBusiness = () => {
+    console.log("Got to goToBusiness (scrollTo method)");
+    scroll.current.scrollTo({x:9000, y:0, animated: true });
+  }
 
-  
+ 
 
   return (
     <SafeAreaView style={{ flex: 1, margin: (10,10,10,10)}}> 
-    <View style={styles.topBar}>
-        <View style = {styles.topButton}>
+    
+  
+    <View style={{flexDirection: 'row', justifyContent: 'space-around', margin: (10,10,10,10),}}>
+        <View style = {{width: 125, height:100 }}>
           <Button onPress={this.gridDelete.bind(this)} 
           title="Clear Screen" 
+          color="#000080"
+          fontSize="24"
           />
         </View>
         <View>
@@ -314,15 +303,18 @@ const Story_Creation = ()=>{
           />
         </View>
 
-        <View style = {{height: 50, width:120}}>
-          <Button onPress={saveToCameraRoll.bind(storyCapture)} 
+        <View style = {{width: 125, height:100 }}>
+          <Button onPress={saveToArchive.bind()} 
           title="Save To Archive" 
+          color="#000080"
           />
+            
+            
           
         </View>
         
     </View>
-    <ViewShot ref={storyCapture} options={{ format: "jpg", quality: 0.9, result: "data-uri" }}>
+    
         
         <Animated.View>
         <FlatList
@@ -336,20 +328,21 @@ const Story_Creation = ()=>{
             
             />
          </Animated.View>           
-
-      <View>
+         
+      <View style={{paddingTop: 10}}>
           <TextInput style={styles.contextBox} 
           onChangeText={text => onChangeContextText(text)}
           value={currentContextText}
           />
       </View>
 
-    </ViewShot>
+      
       <View style={styles.bottomView}>
           <View style = {styles.scrollButtonFlex}>
-            <Button onPress={goToSchool}style = {styles.scrollButton} title="School" />
-            <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" />
-            <Button onPress={goToDesign} style = {styles.scrollButton} title="Design" />
+            <Button onPress={goToSchool}style = {styles.scrollButton} title="School" color="#000080"/>
+            <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" color="#000080"/>
+            <Button onPress={goToDesign} style = {styles.scrollButton} title="Design" color="#000080"/>
+            <Button onPress={goToBusiness} style = {styles.scrollButton} title="Business" color="#000080"/>
           </View>
           <View style = {{position: 'absolute', bottom: 0 }}>
             <ScrollView style={styles.scrollViewStyle} ref={scroll} horizontal={true}> 
@@ -372,7 +365,8 @@ const Story_Creation = ()=>{
                       
             </ScrollView>
             </View>
-      </View>   
+      </View>  
+       
     </SafeAreaView>
     
   );
@@ -588,12 +582,16 @@ export default story;
           
           width: 120,
           
-          height: 50,
+          height: 75,
+          //Buttons cannot handle the style prop, colour has to be added manually in the button 
+          //color: '#fffdd0',
         },
         titleBox:{
           height: 50 ,
           //flex: 1,
-          width: 300,
+          width: 400,
+          textAlign:"center",
+          fontSize: 28,
           borderWidth: 1,
           borderColor: '#d3d3d3',
           justifyContent: 'center'
@@ -604,13 +602,18 @@ export default story;
           margin: (10,10,10,10),
         },
         contextBox:{
-          height: 75 ,
+          height: 150 ,
           //flex: 1,
           width: '100%',
+          textAlign:"center",
           borderWidth: 1,
+          fontSize: 20,
           borderColor: '#d3d3d3',
           alignItems: 'center',
+          
           margin: (10,0,10,0),
+          //position: 'relative',
+          
         }
   
     });
