@@ -14,39 +14,33 @@ import { render } from 'react-dom';
 
 function HomeScreen({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
-      <Text>Home Screen</Text>
-
+    <View style={{ flex: 1, flexDirection: 'column', alignContent: 'center' ,justifyContent: "space-around"}}>
+      <Text style={styles.textStyle} >MyStory</Text>
       <View>
-        <Button
-          title="Go to Details"
+        <TouchableOpacity
           onPress={() => navigation.navigate('Details')}
-          color="#000080"
-        />
+          style={styles.menuButtons}
+        >
+          <Text style={styles.textStyle}>Create New Story</Text>
+        </TouchableOpacity>
       </View>
-
       <View>
-        <Button
-          title="Go to Archive"
-          onPress={() => navigation.navigate('Archive')}
-          color="#000080"
-        />
-      </View>
-
-      <View>
-        <Button
-          title="Tutorial"
+        <TouchableOpacity
           onPress={() => navigation.navigate('Tutorial')}
-          color="#000080"
-        />
+          style={styles.menuButtons}
+        >
+          <Text style={styles.textStyle}>Tutorial</Text>
+        </TouchableOpacity>
       </View>
 
       <View>
-        <Button
-          title="What are Social Stories?"
+        <TouchableOpacity
           onPress={() => navigation.navigate('How To Story')}
-          color="#000080"
-        />
+          style={styles.menuButtons}
+        >
+          <Text style={styles.textStyle}>What are Social Stories?</Text>
+        </TouchableOpacity>
+
       </View>
     </View>
   );
@@ -127,7 +121,15 @@ const styles = StyleSheet.create(
           alignItems: 'center',
           justifyContent: 'center',
           paddingTop: ( Platform.OS === 'ios' ) ? 20 : 0
-      },  
+      }, 
+      menuButtons:{
+        width: '70%',
+        height: 100,
+        margin: 120,
+        borderWidth: 1,
+        borderColor: '#333333',
+        backgroundColor: '#fffdd0',
+      },
       bottomView:{
    
         width: '100%', 
@@ -165,9 +167,8 @@ const styles = StyleSheet.create(
         marginVertical: 20       
       },
       textStyle:{
-   
-        color: '#fff',
-        fontSize:22
+        fontSize: 39,
+        textAlign: 'center',
       },
       row:{
         backgroundColor: '#ffffff',
