@@ -15,7 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import archive from './Archive';
 //import RNFetchBlob from 'react-native-fetch-blob'
 
-//20 images imported - School, 20 images imported - Medical, 20 images imported - Design, 20 images imported - Business, 
+//20 images imported - School, 20 images imported - Medical, 30 images imported - Children, 30 images imported - Emotions, 
 //20 images imported - Arrows, 20 images imported - equipment, 40 images imported - AltMedical, 25 images imported - AltSchool
   const storyImages = [
     require('./assets/Images/School/backpack.png'),
@@ -58,46 +58,66 @@ import archive from './Archive';
     require('./assets/Images/Medical/test_tube.png'),
     require('./assets/Images/Medical/tooth.png'),
     require('./assets/Images/Medical/vision.png'),
-    require('./assets/Images/Design/computer_mouse.png'),
-    require('./assets/Images/Design/cube.png'),
-    require('./assets/Images/Design/desk.png'),
-    require('./assets/Images/Design/graphic_design.png'),
-    require('./assets/Images/Design/graphic_tool_1.png'),
-    require('./assets/Images/Design/graphic_tool.png'),
-    require('./assets/Images/Design/idea.png'),
-    require('./assets/Images/Design/laptop.png'),
-    require('./assets/Images/Design/layers.png'),
-    require('./assets/Images/Design/list.png'),
-    require('./assets/Images/Design/paint_brush.png'),
-    require('./assets/Images/Design/pantone.png'),
-    require('./assets/Images/Design/pencil_case.png'),
-    require('./assets/Images/Design/photo_camera.png'),
-    require('./assets/Images/Design/picture.png'),
-    require('./assets/Images/Design/rgb.png'),
-    require('./assets/Images/Design/smartphone.png'),
-    require('./assets/Images/Design/tablet.png'),
-    require('./assets/Images/Design/vector_1.png'),
-    require('./assets/Images/Design/vector.png'),
-    require('./assets/Images/Business/analytics.png'),
-    require('./assets/Images/Business/bar-chart.png'),
-    require('./assets/Images/Business/businessman.png'),
-    require('./assets/Images/Business/chat.png'),
-    require('./assets/Images/Business/growth.png'),
-    require('./assets/Images/Business/handshake.png'),
-    require('./assets/Images/Business/hourglass.png'),
-    require('./assets/Images/Business/idea.png'),
-    require('./assets/Images/Business/keyword.png'),
-    require('./assets/Images/Business/laptop.png'),
-    require('./assets/Images/Business/like.png'),
-    require('./assets/Images/Business/medal.png'),
-    require('./assets/Images/Business/megaphone.png'),
-    require('./assets/Images/Business/mountains.png'),
-    require('./assets/Images/Business/placeholder.png'),
-    require('./assets/Images/Business/profits.png'),
-    require('./assets/Images/Business/settings.png'),
-    require('./assets/Images/Business/startup.png'),
-    require('./assets/Images/Business/target.png'),
-    require('./assets/Images/Business/teamwork.png'),
+    require('./assets/Images/Children/boy-1.png'),
+    require('./assets/Images/Children/boy-2.png'),
+    require('./assets/Images/Children/boy-3.png'),
+    require('./assets/Images/Children/boy-4.png'),
+    require('./assets/Images/Children/boy-5.png'),
+    require('./assets/Images/Children/boy-7.png'),
+    require('./assets/Images/Children/boy-8.png'),
+    require('./assets/Images/Children/boy-10.png'),
+    require('./assets/Images/Children/boy-12.png'),
+    require('./assets/Images/Children/boy-13.png'),
+    require('./assets/Images/Children/boy-14.png'),
+    require('./assets/Images/Children/boy-15.png'),
+    require('./assets/Images/Children/boy-16.png'),
+    require('./assets/Images/Children/boy.png'),
+    require('./assets/Images/Children/girl.png'),
+    require('./assets/Images/Children/girl-1.png'),
+    require('./assets/Images/Children/girl-2.png'),
+    require('./assets/Images/Children/girl-3.png'),
+    require('./assets/Images/Children/girl-4.png'),
+    require('./assets/Images/Children/girl-5.png'),
+    require('./assets/Images/Children/girl-6.png'),
+    require('./assets/Images/Children/girl-7.png'),
+    require('./assets/Images/Children/girl-9.png'),
+    require('./assets/Images/Children/girl-10.png'),
+    require('./assets/Images/Children/girl-11.png'),
+    require('./assets/Images/Children/girl-12.png'),
+    require('./assets/Images/Children/girl-13.png'),
+    require('./assets/Images/Children/girl-14.png'),
+    require('./assets/Images/Children/girl-15.png'),
+    require('./assets/Images/Children/girl-16.png'),
+    require('./assets/Images/Emotions/angry-1.png'),
+    require('./assets/Images/Emotions/angry.png'),
+    require('./assets/Images/Emotions/bored-1.png'),
+    require('./assets/Images/Emotions/bored.png'),
+    require('./assets/Images/Emotions/confused.png'),
+    require('./assets/Images/Emotions/crying-1.png'),
+    require('./assets/Images/Emotions/embarrassed.png'),
+    require('./assets/Images/Emotions/emoticons.png'),
+    require('./assets/Images/Emotions/happy-1.png'),
+    require('./assets/Images/Emotions/happy-2.png'),
+    require('./assets/Images/Emotions/happy-3.png'),
+    require('./assets/Images/Emotions/happy-4.png'),
+    require('./assets/Images/Emotions/happy.png'),
+    require('./assets/Images/Emotions/ill.png'),
+    require('./assets/Images/Emotions/in-love.png'),
+    require('./assets/Images/Emotions/kissing.png'),
+    require('./assets/Images/Emotions/mad.png'),
+    require('./assets/Images/Emotions/nerd.png'),
+    require('./assets/Images/Emotions/quiet.png'),
+    require('./assets/Images/Emotions/sad.png'),
+    require('./assets/Images/Emotions/secret.png'),
+    require('./assets/Images/Emotions/smart.png'),
+    require('./assets/Images/Emotions/smile.png'),
+    require('./assets/Images/Emotions/smiling.png'),
+    require('./assets/Images/Emotions/surprised.png'),
+    require('./assets/Images/Emotions/suspicious.png'),
+    require('./assets/Images/Emotions/suspicious-1.png'),
+    require('./assets/Images/Emotions/tongue-out-1.png'),
+    require('./assets/Images/Emotions/unhappy.png'),
+    require('./assets/Images/Emotions/wink.png'),
     require('./assets/Images/Arrows/3d-up-arrow-1.png'),
     require('./assets/Images/Arrows/back-drawn-arrow.png'),
     require('./assets/Images/Arrows/check-mark-arrow.png'),
@@ -383,29 +403,29 @@ const Story_Creation = ()=>{
     scroll.current.scrollTo({x:3000, y:0, animated: true });
   }
 
-  goToDesign = () => {
+  goToChildren = () => {
     console.log("Got to goToDesign (scrollTo method)");
     scroll.current.scrollTo({x:6000, y:0, animated: true });
   }
-  goToBusiness = () => {
-    console.log("Got to goToBusiness (scrollTo method)");
-    scroll.current.scrollTo({x:9000, y:0, animated: true });
+  goToEmontions = () => {
+    console.log("Got to goToEmotions (scrollTo method)");
+    scroll.current.scrollTo({x:10500, y:0, animated: true });
   }
   goToArrows = () => {
     console.log("Got to goToArrows (scrollTo method)");
-    scroll.current.scrollTo({x:12000, y:0, animated: true });
+    scroll.current.scrollTo({x:11500, y:0, animated: true });
   }
   goToEquipment = () => {
     console.log("Got to goToEquipment (scrollTo method)");
-    scroll.current.scrollTo({x:15000, y:0, animated: true });
+    scroll.current.scrollTo({x:18000, y:0, animated: true });
   }
   goToAltMedical = () => {
     console.log("Got to goToAltMedical (scrollTo method)");
-    scroll.current.scrollTo({x:18000, y:0, animated: true });
+    scroll.current.scrollTo({x:21000, y:0, animated: true });
   }
   goToAltSchool = () => {
     console.log("Got to goToAltSchool (scrollTo method)");
-    scroll.current.scrollTo({x:24000, y:0, animated: true });
+    scroll.current.scrollTo({x:27000, y:0, animated: true });
   }
 
   return (
@@ -466,8 +486,8 @@ const Story_Creation = ()=>{
           <View style = {styles.scrollButtonFlex}>
             <Button onPress={goToSchool}style = {styles.scrollButton} title="School" color="#333333"/>
             <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" color="#333333"/>
-            <Button onPress={goToDesign} style = {styles.scrollButton} title="Design" color="#333333"/>
-            <Button onPress={goToBusiness} style = {styles.scrollButton} title="Business" color="#333333"/>
+            <Button onPress={goToChildren} style = {styles.scrollButton} title="Children" color="#333333"/>
+            <Button onPress={goToEmontions} style = {styles.scrollButton} title="Emotions" color="#333333"/>
             <Button onPress={goToArrows} style = {styles.scrollButton} title="Arrows" color="#333333"/>
             <Button onPress={goToEquipment} style = {styles.scrollButton} title="Equipment" color="#333333"/>
             <Button onPress={goToAltMedical} style = {styles.scrollButton} title="Alt Medical" color="#333333"/>
