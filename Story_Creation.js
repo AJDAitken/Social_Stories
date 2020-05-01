@@ -622,7 +622,7 @@ class Social_Story_Creation extends Component{
         return(
           //<NavigationContainer independent={false}>
           
-           <Tab.Navigator>
+           <Tab.Navigator style={styles.tabBar}>
              
               <Tab.Screen name="Screen One" component={Screen_1} />
               <Tab.Screen name="Screen Two" component={Screen_2} />
@@ -657,7 +657,7 @@ export default story;
             paddingTop: ( Platform.OS === 'ios' ) ? 20 : 0
         }, 
          gridContainer:{
-          borderWidth:1,
+          borderWidth:3,
           borderColor: '#d3d3d3',
           height: Platform.OS === 'ios' ? '45%' : '55%', 
           width: '100%',
@@ -737,12 +737,15 @@ export default story;
           //Buttons cannot handle the style prop, colour has to be added manually in the button 
           //color: '#fffdd0',
         },
+        tabBar:{
+          height: 100,
+        },
         titleBox:{
-          height: 50 ,
+          height: 65,
           //flex: 1,
           width: 400,
           textAlign:"center",
-          fontSize: 28,
+          fontSize: 42,
           borderWidth: 1,
           borderColor: '#d3d3d3',
           justifyContent: 'center'
@@ -758,7 +761,7 @@ export default story;
           width: '100%',
           textAlign:"center",
           borderWidth: 1,
-          fontSize: 20,
+          fontSize: 28,
           borderColor: '#d3d3d3',
           alignItems: 'center',
           

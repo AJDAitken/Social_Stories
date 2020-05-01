@@ -69,19 +69,187 @@ function Tutorial(){
   return(
   <View>
     <Text>
-      tutorial test text
+      How to make a story:
     </Text>
+    
   </View>
   );
 }
 
 function How_To_Story(){
   return(
-  <View>
+    <ScrollView>
+  <View style={styles.SS_Body}>
+    <Text style={styles.SS_Heading}>
+      What is a Social Story?
+    </Text>
+    <Text style={styles.SS_Text}>
+    A Social Story accurately describes a context, skill, achievement, or concept according to 10 defining criteria. These
+    criteria guide Story research, development, and implementation to ensure an overall patient and supportive quality,
+    and a format, ‘voice’, content, and learning experience that is descriptive, meaningful, respectful, and physically,
+    socially, and emotionally safe for the Story audience (a child, adolescent, or adult).
+    </Text>
     <Text>
-      What is a social story, and how the heck do you make one?? 
+      
+    </Text>
+    <Text style={styles.SS_Heading}>
+    Criterion 1: The Social Story Goal
+    </Text>
+    <Text style={styles.SS_Text}>
+    Authors follow a defined process to share accurate information using a content, format, and voice that is descriptive,
+    meaningful, and physically, socially, and emotionally safe for the Audience.
+    </Text>
+    <Text>
+      
+    </Text>
+    <Text style={styles.SS_Heading}>
+    Criterion 2: Two-Step Discovery 
+    </Text>
+    <Text style={styles.SS_Text}>
+    Keeping the Goal in mind, authors gather relevant information to 1) improve their understanding of the Audience in
+    relation to a situation, skill, or concept and/or 2) identify the specific topic(s) and the most critical information (focus)
+    of each Story. At least 50% of all Social Stories applaud achievements. 
+    </Text>
+    <Text>
+    
+    </Text>
+    <Text style={styles.SS_Heading}>
+    Criterion 3: Three-Parts and a Title
+    </Text>
+    <Text style={styles.SS_Text}>
+    A Social Story/Article has a title and introduction that clearly identifies the topic, a body that adds detail, and a
+    conclusion that reinforces and summarizes the information. 
+    </Text>
+    <Text>
+    
+    </Text>
+    <Text style={styles.SS_Heading}>
+    Criterion 4: Four·mat Makes it Mine!
+    </Text>
+    <Text style={styles.SS_Text}>
+    The Social Story™ format is tailored to the individual abilities, attention span, learning style and - whenever possible
+    – talents and/or interests of its Audience. 
+    </Text>
+    <Text>
+    
+    </Text>
+    <Text style={styles.SS_Heading}>
+    Criterion 5: Five Factors Define Voice and Vocabulary
+    </Text>
+    <Text style={styles.SS_Text}>
+    A Social Story has a patient and supportive “voice” and vocabulary that is defined by five factors:
+    </Text>
+    <Text style={styles.SS_Text}>
+    1) Exclusive use of first- and/or third-person perspective statements (no second person statements);
+    </Text>
+    <Text style={styles.SS_Text}>
+    2) Past, present, or future tense;
+    </Text>
+    <Text style={styles.SS_Text}>
+    3) Positive and patient tone;
+    </Text>
+    <Text style={styles.SS_Text}>
+    4) Literally accurate; and
+    </Text>
+    <Text style={styles.SS_Text}>
+    5) Accurate meaning.
+    </Text>
+    <Text>
+    
+    </Text>
+    <Text style={styles.SS_Heading}>
+    Criterion 6: Six Questions Guide Story Development
+    </Text>
+    <Text style={styles.SS_Text}>
+    A Social Story™ answers relevant ’WH’ questions that describe context, including place (WHERE), time-related
+    information (WHEN), relevant people (WHO), important cues (WHAT), basic activities, behaviors, or statements
+    (HOW), and the reasons or rationale behind them (WHY).
+    </Text>
+    <Text>
+    
+    </Text>
+    <Text style={styles.SS_Heading}>
+    Criterion 7: Seven is About Sentences
+    </Text>
+    <Text style={styles.SS_Text}>
+    A Social Story is comprised of Descriptive Sentences and may also have one or more Coaching Sentence(s).
+    </Text>
+    <Text style={styles.SS_Text}>
+    Descriptive Sentences accurately describe relevant aspects of context, including external and/or
+    internal factors while adhering to all applicable Social Story Criteria. They are free of assumption or bias, judgment,
+    devaluation, or unidentified opinion
+    </Text>
+    <Text style={styles.SS_Text}>
+    Coaching Sentences gently guide behavior via descriptions of effective Team or Audience
+    responses, or structured Audience Self-Coaching, adhering to all other applicable Social Story Criteria. 
+    </Text>
+    <Text>
+    
+    </Text>
+    <Text style={styles.SS_Heading}>
+    #8 A Gr·eight! Formula
+    </Text>
+    <Text style={styles.SS_Text}>
+    The Social Story™ Formula ensures that every Social Story describes more than directs.
+    </Text>
+    <Text style={styles.SS_Text}>
+    (Total # of Descriptive Sentences / Total # of Coaching Sentences) ≥ 2
+    </Text>
+    <Text style={styles.SS_Text}>
+    *If there are no (0) Sentences that Coach, use 1 in the denominator.
+    </Text>
+    <Text>
+    
+    </Text>
+    <Text style={styles.SS_Heading}>
+    Criterion 9: Nine to Refine
+    </Text>
+    <Text style={styles.SS_Text}>
+    The first draft of a story is rarely the final draft. A story draft is always reviewed by relevant caregivers and revised if
+    necessary to ensure that it meets all defining Social Story criteria.
+    </Text>
+    <Text>
+    
+    </Text>
+    <Text style={styles.SS_Heading} >
+    Criterion 10: Ten Guides to Editing and Implementation
+    </Text>
+    <Text style={styles.SS_Text}>
+    The Ten Guides to Implementation ensure that the philosophy and Criteria that guide Story/Article development are
+    consistent with how it is introduced and reviewed with the Audience. They are:
+    </Text>
+    <Text style={styles.SS_Text}>
+    1) Plan for Comprehension
+    </Text>
+    <Text style={styles.SS_Text}>
+    2) Plan Story Support
+    </Text>
+    <Text style={styles.SS_Text}>
+    3) Plan Story Review
+    </Text>
+    <Text style={styles.SS_Text}>
+    4) Plan a Positive Introduction
+    </Text>
+    <Text style={styles.SS_Text}>
+    5) Monitor
+    </Text>
+    <Text style={styles.SS_Text}>
+    6) Organize the Stories
+    </Text>
+    <Text style={styles.SS_Text}>
+    7) Mix and Match to Build Concepts
+    </Text>
+    <Text style={styles.SS_Text}>
+    8) Story Re-runs and Sequels to Tie Past, Present, and Future
+    </Text>
+    <Text style={styles.SS_Text}>
+    9) Recycle Instruction into Applause
+    </Text>
+    <Text style={styles.SS_Text}>
+    10) Stay Current on Social Story Research and Updates
     </Text>
   </View>
+  </ScrollView>
   );
 }
 
@@ -129,6 +297,7 @@ const styles = StyleSheet.create(
         borderWidth: 1,
         borderColor: '#333333',
         backgroundColor: '#fffdd0',
+        justifyContent: 'center',
       },
       bottomView:{
    
@@ -177,7 +346,19 @@ const styles = StyleSheet.create(
         //margin: 1,
         marginHorizontal: 1,
         marginVertical: 1,
-      }
+      },
+      SS_Heading:{
+        fontSize: 28,
+      },
+      SS_Text:{
+        fontSize : 20,
+      },
+      SS_Body:{
+        flex: 1, 
+        alignItems: 'flex-start', 
+        justifyContent: 'center',
+         margin: 20,
+      },
 
   });
 
