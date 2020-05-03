@@ -413,7 +413,7 @@ const Story_Creation = ()=>{
   }
   goToArrows = () => {
     console.log("Got to goToArrows (scrollTo method)");
-    scroll.current.scrollTo({x:11500, y:0, animated: true });
+    scroll.current.scrollTo({x:15000, y:0, animated: true });
   }
   goToEquipment = () => {
     console.log("Got to goToEquipment (scrollTo method)");
@@ -433,10 +433,10 @@ const Story_Creation = ()=>{
     
   
     <View style={{flexDirection: 'row', justifyContent: 'space-around', margin: (10,10,10,10),}}>
-        <View style = {{width: 125, height:100 }}>
+        <View style = {{width: 125, height:100, }}>
           <Button onPress={this.gridDelete.bind(this)} 
           title="Clear Screen" 
-          color="#333333"
+          color="#0000e6"
           fontSize="24"
           />
         </View>
@@ -450,7 +450,7 @@ const Story_Creation = ()=>{
         <View style = {{width: 125, height:100 }}>
           <Button onPress={saveToArchive.bind()} 
           title="Save To Archive" 
-          color="#333333"
+          color="#0000e6"
           />
             
             
@@ -475,7 +475,7 @@ const Story_Creation = ()=>{
          </Animated.View>           
          
       <View style={{paddingTop: 10}}>
-          <TextInput style={styles.contextBox} 
+          <TextInput multiline style={styles.contextBox} 
           onChangeText={text => onChangeContextText(text)}
           value={currentContextText}
           />
@@ -484,14 +484,14 @@ const Story_Creation = ()=>{
       
       <View style={{backgroundColor: '#C0C0C0', paddingTop:10}}>
           <View style = {styles.scrollButtonFlex}>
-            <Button onPress={goToSchool}style = {styles.scrollButton} title="School" color="#333333"/>
-            <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" color="#333333"/>
-            <Button onPress={goToChildren} style = {styles.scrollButton} title="Children" color="#333333"/>
-            <Button onPress={goToEmontions} style = {styles.scrollButton} title="Emotions" color="#333333"/>
-            <Button onPress={goToArrows} style = {styles.scrollButton} title="Arrows" color="#333333"/>
-            <Button onPress={goToEquipment} style = {styles.scrollButton} title="Equipment" color="#333333"/>
-            <Button onPress={goToAltMedical} style = {styles.scrollButton} title="Alt Medical" color="#333333"/>
-            <Button onPress={goToAltSchool} style = {styles.scrollButton} title="Alt School" color="#333333"/>
+            <Button onPress={goToSchool}style = {styles.scrollButton} title="School" color="#0000e6"/>
+            <Button onPress={goToMedical}style = {styles.scrollButton} title="Medical" color="#0000e6"/>
+            <Button onPress={goToChildren} style = {styles.scrollButton} title="Children" color="#0000e6"/>
+            <Button onPress={goToEmontions} style = {styles.scrollButton} title="Emotions" color="#0000e6"/>
+            <Button onPress={goToArrows} style = {styles.scrollButton} title="Arrows" color="#0000e6"/>
+            <Button onPress={goToEquipment} style = {styles.scrollButton} title="Equipment" color="#0000e6"/>
+            <Button onPress={goToAltMedical} style = {styles.scrollButton} title="Alt Medical" color="#0000e6"/>
+            <Button onPress={goToAltSchool} style = {styles.scrollButton} title="Alt School" color="#0000e6"/>
           </View>
           <View style = {{position: 'absolute', bottom: 0 }}>
             <ScrollView style={styles.scrollViewStyle} ref={scroll} horizontal={true}> 

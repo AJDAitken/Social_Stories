@@ -1,64 +1,70 @@
 import React, { Component, useState } from 'react';
-//import SortableGrid from 'react-native-sortable-grid';
-import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, PanResponder, Animated} from 'react-native';
+import { StyleSheet, Text, View, Button, ImageBackground, SafeAreaView, TouchableOpacity, ScrollView, Image, FlatList, PanResponder, Animated} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import story from'./Story_Creation';
 import archive from'./Archive';
-//import archiveArray from'./Story_Creation';
 import { render } from 'react-dom';
-//import {Screen_1, Screen_2, Screen_3, Screen_4, Screen_5, Screen_6} from './Story_Creation'
+
 
 
 
 function HomeScreen({navigation}) {
   return (
-    <View style={{ flex: 1, flexDirection: 'column', alignContent: 'center' ,justifyContent: "space-around"}}>
-      <Text style={styles.textStyle} >MyStory</Text>
-      <View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Details')}
-          style={styles.menuButtons}
-        >
-          <Text style={styles.textStyle}>Create New Story</Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Tutorial')}
-          style={styles.menuButtons}
-        >
-          <Text style={styles.textStyle}>Tutorial</Text>
-        </TouchableOpacity>
-      </View>
+    <SafeAreaView >
+      <ImageBackground source={require('./assets/background.jpg')} style={{height: '100%', width: '100%'}}>
+        <View style={styles.headingBox}>
+          <Text style={styles.textStyleHeading} >My Story</Text>
+        </View>
+      
+     <View style={{ flex: 1, flexDirection: 'column', justifyContent: "space-evenly"}}>
+        <View >
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Story Creation')}
+            style={styles.menuButtons}
+          >
+            <Text style={styles.textStyle}>Create New Story</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Tutorial')}
+            style={styles.menuButtons}
+          >
+            <Text style={styles.textStyle}>Tutorial</Text>
+          </TouchableOpacity>
+        </View>
 
-      <View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('How To Story')}
-          style={styles.menuButtons}
-        >
-          <Text style={styles.textStyle}>What are Social Stories?</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Story Guide')}
+            style={styles.menuButtons}
+          >
+            <Text style={styles.textStyle}>What are Social Stories?</Text>
+          </TouchableOpacity>
 
-      </View>
-    </View>
+        </View>
+      </View> 
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 
 
 
-
+//Initially, this page was betwen the main menu and the story creation. It was for the user to input information on the story, such as its name, location etc. NOt currently used, but left in for future dev
 function New_Story_Details({navigation}) {
   return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Story Details Screen</Text> 
         <View>
-          <Button
-            title="Go to Story Creation"
+          <TouchableOpacity
             onPress={() => navigation.navigate('Story Creation')}
-            color="#000080"
-          />     
+            style={styles.menuButtons}
+          >   
+          <Text style={styles.textStyle}>Go to Story Creation</Text> 
+          </TouchableOpacity>
           </View>
       </View> 
     
@@ -67,18 +73,134 @@ function New_Story_Details({navigation}) {
 
 function Tutorial(){
   return(
-  <View>
-    <Text>
-      How to make a story:
-    </Text>
-    
+  <ScrollView>
+  <View style={styles.SS_Body}>
+      <Text style={styles.SS_Heading}>
+        What does the Story Creator Do?
+      </Text>
+      <Text style={styles.SS_Text}>
+        The numbers in the red circles correspond to an important element for producing a story. 
+        They are numbered left to right, top to bottom as they appear in the application.
+        </Text>
+      <Text></Text>
+      
+    <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+      <View>
+        <Image
+         style = {styles.tutorialImages}
+         source={require('./assets/Tutorial/Labeled.png')}/>
+         
+      </View>
+
+      <View style={{margin: 10}}>
+        <Text style={styles.SS_Heading}>
+        1 - Clear Screen
+        </Text>
+        <Text style={styles.SS_Text}>
+        On tapping the button, it clears all images from the story creation body.
+        </Text>
+        <Text>
+          
+        </Text>
+        <Text style={styles.SS_Heading}>
+        2 - Title Box
+        </Text>
+        <Text style={styles.SS_Text}>
+        Clickable  text input box to add text as the story title.
+        </Text>
+        <Text>
+          
+        </Text>
+        <Text style={styles.SS_Heading}>
+        3 - Save To Archive
+        </Text>
+        <Text style={styles.SS_Text}>
+        Feature not currently available
+        </Text>
+        <Text>
+          
+        </Text>
+        <Text style={styles.SS_Heading}>
+        4 - Story Creation Body
+        </Text>
+        <Text style={styles.SS_Text}>
+        Drag and Droppable screen area. Arranges images once added to create visual representation of the story.
+        </Text>
+        <Text>
+          
+        </Text>
+        <Text style={styles.SS_Heading}>
+        5 - Context Box 
+        </Text>
+        <Text style={styles.SS_Text}>
+        Clickable  text input box to add context to the story.
+        </Text>
+        <Text>
+          
+        </Text>
+        <Text style={styles.SS_Heading}>
+        6 - Image Categories 
+        </Text>
+        <Text style={styles.SS_Text}>
+        Button list, takes the user to the starting point of the clicked category. The first 4 have coloured images, and the last four contain black and hite images. 
+        </Text>
+        <Text>
+          
+        </Text>
+        <Text style={styles.SS_Heading}>
+        7 - Image List 
+        </Text>
+        <Text style={styles.SS_Text}>
+        A scrollable list containing the images that can be added to the story, it can  be swiped left or right to move the list and reveal different images. On tapping an image, it is added to the story body, where it can be dragged to its location. 
+        </Text>
+        <Text>
+          
+        </Text>
+        <Text style={styles.SS_Heading}>
+        8 - Screen Menu
+        </Text>
+        <Text style={styles.SS_Text}>
+        Tappable button list to navigate between the different screens of the same story. 
+        </Text> 
+        <Text></Text>
+      </View>   
+    </View>
+
+    <View>
+      <Text style={styles.SS_Heading}>
+        Heres an example of the start of a story!
+      </Text>
+      <Text></Text>
+      <ScrollView horizontal = {true} >
+        <View style={{alignContent: 'space-between', flexDirection: 'row'}}>
+        <Image
+          style = {styles.tutorialImages}
+          source={require('./assets/Tutorial/Empty_Story.jpg')}
+        />
+        <Image
+          style = {styles.tutorialImages}
+          source={require('./assets/Tutorial/1_Screen.jpg')}
+        />
+        <Image
+          style = {styles.tutorialImages}
+          source={require('./assets/Tutorial/2_Screen.jpg')}
+        />
+        <Image
+          style = {styles.tutorialImages}
+          source={require('./assets/Tutorial/3_Screen.jpg')}
+        />
+        </View>
+      </ScrollView>
+    </View>
+
   </View>
+  </ScrollView>
   );
 }
 
 function How_To_Story(){
   return(
-    <ScrollView>
+  <ScrollView>
   <View style={styles.SS_Body}>
     <Text style={styles.SS_Heading}>
       What is a Social Story?
@@ -272,7 +394,7 @@ export default class Social_Stories extends React.Component{
           <Stack.Screen name="Details" component={New_Story_Details} />
           <Stack.Screen name="Story Creation" component={story.render} />
           <Stack.Screen name="Tutorial" component={Tutorial} />
-          <Stack.Screen name="How To Story" component={How_To_Story} />
+          <Stack.Screen name="Story Guide" component={How_To_Story} />
           <Stack.Screen name="Archive" component={archive.render} />
         </Stack.Navigator>
       </NavigationContainer>
@@ -293,11 +415,14 @@ const styles = StyleSheet.create(
       menuButtons:{
         width: '70%',
         height: 100,
-        margin: 120,
         borderWidth: 1,
         borderColor: '#333333',
-        backgroundColor: '#fffdd0',
+        backgroundColor: '#0000e6',
         justifyContent: 'center',
+        borderRadius:10,
+        paddingTop:15,
+        paddingBottom:15,
+        marginLeft: '15%',
       },
       bottomView:{
    
@@ -329,15 +454,32 @@ const styles = StyleSheet.create(
         flex:1,
         flexDirection: "row",
       },
-
       scrollViewStyle:{
         flex: 1,
         marginHorizontal: 20,
         marginVertical: 20       
       },
       textStyle:{
-        fontSize: 39,
+        fontSize: 42,
         textAlign: 'center',
+        color: '#ffffff'
+      },
+      textStyleHeading:{
+        fontSize: 64,
+        textAlign: 'center',
+        color: '#ffffff',
+        //borderWidth:1,
+        //borderColor: '#ffffff',
+      },
+      headingBox:{
+        borderWidth:1,
+        borderColor: '#ffffff',
+        backgroundColor: '#0000e6',
+        //width : 200,
+        height: 125,
+        alignItems: 'center',
+        //flexDirection: 'column',
+        justifyContent: 'center',
       },
       row:{
         backgroundColor: '#ffffff',
@@ -355,9 +497,15 @@ const styles = StyleSheet.create(
       },
       SS_Body:{
         flex: 1, 
-        alignItems: 'flex-start', 
+        //alignItems: 'flex-start', 
         justifyContent: 'center',
          margin: 20,
+         
+      },
+      tutorialImages:{
+          width: 400,
+          height: 650,
+          marginRight: 10,
       },
 
   });
