@@ -167,6 +167,22 @@ function Tutorial(){
     </View>
 
     <View>
+    <Text style={styles.SS_Heading}>
+      Save the Story
+    </Text>
+    <Text style={styles.SS_Text}>
+      The in-app Archive is currently unavailable, but the stories can still be saved!
+    </Text>
+    <Text style={styles.SS_Text}>
+      Once the story is complete, go to each individual screen of the story and hold in the power button and the home button at the same time.
+      This will take a screenshot to your device, which will be saved to your gallery. From there you can crop and order the screens into the final story!
+    </Text>
+    <Text>
+          
+        </Text>
+    </View>
+
+    <View>
       <Text style={styles.SS_Heading}>
         Heres an example of the start of a story!
       </Text>
